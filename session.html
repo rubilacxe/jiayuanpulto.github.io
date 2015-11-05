@@ -42,7 +42,7 @@
 &ensp;&ensp;&ensp;&ensp;Cache-Control: no-store, no-cache, must-revalidate         
 &ensp;&ensp;&ensp;&ensp;Pragma: no-cache    
         
-&ensp;&ensp;&ensp;&ensp;服务器端对于用户的首次访问生成了sessionid，并通过http协议将sessionid发送给客户端，希望客户端以cookie的形式保存下来，这样下次访问my.test.com时客户端带上该cookie，服务器端就能识别该用户，并可通过$\_SESSION记录与读取用户的信息。客户端禁用cookie的情况下，可以通过http://my.test.com/index.php?PHPSESSID=de19rh308tdnl0597png19v0d0传递sessionid（泄露sessionid，不安全）。对于cookie，在服务器端调用setcookie("myCookie","xxxxxxxxxx",...)函数即可让客户端保存该cookie，下次访问时验证$_COOKIE["myCookie"]。                
+&ensp;&ensp;&ensp;&ensp;服务器端对于用户的首次访问生成了sessionid，并通过http协议将sessionid发送给客户端，希望客户端以cookie的形式保存下来，这样下次访问my.test.com时客户端带上该cookie，服务器端就能识别该用户，并可通过$_SESSION记录与读取用户的信息。客户端禁用cookie的情况下，可以通过http://my.test.com/index.php?PHPSESSID=de19rh308tdnl0597png19v0d0传递sessionid（泄露sessionid，不安全）。对于cookie，在服务器端调用setcookie("myCookie","xxxxxxxxxx",...)函数即可让客户端保存该cookie，下次访问时验证$_COOKIE["myCookie"]。                
         &ensp;&ensp;&ensp;&ensp;参考如下：       
         &ensp;&ensp;&ensp;&ensp;http://blogread.cn/it/article/6004?f=wb1       
         &ensp;&ensp;&ensp;&ensp;http://blogread.cn/it/article/6578?f=sr       
@@ -69,7 +69,7 @@
     Cache-Control: no-store, no-cache, must-revalidate <br>
     Pragma: no-cache    </p>
 
-<p>    服务器端对于用户的首次访问生成了sessionid，并通过http协议将sessionid发送给客户端，希望客户端以cookie的形式保存下来，这样下次访问my.test.com时客户端带上该cookie，服务器端就能识别该用户，并可通过$_SESSION记录与读取用户的信息。客户端禁用cookie的情况下，可以通过http://my.test.com/index.php?PHPSESSID=de19rh308tdnl0597png19v0d0传递sessionid（泄露sessionid，不安全）。对于cookie，在服务器端调用setcookie("myCookie","xxxxxxxxxx",...)函数即可让客户端保存该cookie，下次访问时验证$_COOKIE["myCookie"]。 <br>
+<p>    服务器端对于用户的首次访问生成了sessionid，并通过http协议将sessionid发送给客户端，希望客户端以cookie的形式保存下来，这样下次访问my.test.com时客户端带上该cookie，服务器端就能识别该用户，并可通过$<em>SESSION记录与读取用户的信息。客户端禁用cookie的情况下，可以通过http://my.test.com/index.php?PHPSESSID=de19rh308tdnl0597png19v0d0传递sessionid（泄露sessionid，不安全）。对于cookie，在服务器端调用setcookie("myCookie","xxxxxxxxxx",...)函数即可让客户端保存该cookie，下次访问时验证$</em>COOKIE["myCookie"]。 <br>
             参考如下： <br>
             http://blogread.cn/it/article/6004?f=wb1 <br>
             http://blogread.cn/it/article/6578?f=sr <br>
