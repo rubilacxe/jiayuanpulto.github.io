@@ -25,7 +25,7 @@
 	</div>
 <div id="md" style="display: none;">
 <!-- markdown -->
-        之前我维护的一个项目是建立在单台服务器上的，后来由于网络等问题迁移到了分布式平台上，结果验证登录信息的session就出问题了（session保存在某台服务器上，当访问落在另一台服务器上时验证就失败了），当时就简单粗暴的换用cookie解决问题了。
+         之前我维护的一个项目是建立在单台服务器上的，后来由于网络等问题迁移到了分布式平台上，结果验证登录信息的session就出问题了（session保存在某台服务器上，当访问落在另一台服务器上时验证就失败了），当时就简单粗暴的换用cookie解决问题了。
         趁现在有时间，系统的来了解下session与cookie吧。
         session与cookie都可以用于用户的登录信息等安全验证，区别是session保存在服务器端，cookie保存在客户端，其他的一些区别就不详叙了。
         按nginx的默认配置，在要访问的index.php文件中加上session_start();，即可开启session（session的具体配置详见php.ini），访问http://my.test.com/index.php，响应头部如下：
@@ -51,7 +51,7 @@
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<pre><code>    之前我维护的一个项目是建立在单台服务器上的，后来由于网络等问题迁移到了分布式平台上，结果验证登录信息的session就出问题了（session保存在某台服务器上，当访问落在另一台服务器上时验证就失败了），当时就简单粗暴的换用cookie解决问题了。
+<pre><code>     之前我维护的一个项目是建立在单台服务器上的，后来由于网络等问题迁移到了分布式平台上，结果验证登录信息的session就出问题了（session保存在某台服务器上，当访问落在另一台服务器上时验证就失败了），当时就简单粗暴的换用cookie解决问题了。
     趁现在有时间，系统的来了解下session与cookie吧。
     session与cookie都可以用于用户的登录信息等安全验证，区别是session保存在服务器端，cookie保存在客户端，其他的一些区别就不详叙了。
     按nginx的默认配置，在要访问的index.php文件中加上session_start();，即可开启session（session的具体配置详见php.ini），访问http://my.test.com/index.php，响应头部如下：
