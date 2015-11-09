@@ -272,19 +272,17 @@
 
 &ensp;&ensp;&ensp;&ensp;消息队列、信号灯、共享内存等，都是基于Sys V的IPC机制进行讨论的，它们的应用局限在单一计算机内的进程间通信；基于BSD套接口不仅可以实现单机内的进程间通信，还可以实现不同计算机进程之间的通信。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+##参考##
+- http://www.ibm.com/developerworks/cn/linux/l-ipc/  
+- https://www.ibm.com/developerworks/cn/linux/l-ipc/part1/  
+- http://www.ibm.com/developerworks/cn/linux/l-ipc/part2/index1.html  
+- http://www.ibm.com/developerworks/cn/linux/l-ipc/part2/index2.html   
+- https://www.ibm.com/developerworks/cn/linux/l-ipc/part3/  
+- https://www.ibm.com/developerworks/cn/linux/l-ipc/part4/  
+- http://www.ibm.com/developerworks/cn/linux/l-ipc/part5/index1.html  
+- http://www.ibm.com/developerworks/cn/linux/l-ipc/part5/index2.html  
+- https://www.ibm.com/developerworks/cn/linux/l-ipc/part6/  
+- http://limboy.me/tech/2010/08/27/php-process-control.html
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -538,6 +536,21 @@ socket_listen($socket);
 </code></pre>
 
 <p>    消息队列、信号灯、共享内存等，都是基于Sys V的IPC机制进行讨论的，它们的应用局限在单一计算机内的进程间通信；基于BSD套接口不仅可以实现单机内的进程间通信，还可以实现不同计算机进程之间的通信。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。</p>
+
+<h2 id="">参考</h2>
+
+<ul>
+<li>http://www.ibm.com/developerworks/cn/linux/l-ipc/  </li>
+<li>https://www.ibm.com/developerworks/cn/linux/l-ipc/part1/  </li>
+<li>http://www.ibm.com/developerworks/cn/linux/l-ipc/part2/index1.html  </li>
+<li>http://www.ibm.com/developerworks/cn/linux/l-ipc/part2/index2.html   </li>
+<li>https://www.ibm.com/developerworks/cn/linux/l-ipc/part3/  </li>
+<li>https://www.ibm.com/developerworks/cn/linux/l-ipc/part4/  </li>
+<li>http://www.ibm.com/developerworks/cn/linux/l-ipc/part5/index1.html  </li>
+<li>http://www.ibm.com/developerworks/cn/linux/l-ipc/part5/index2.html  </li>
+<li>https://www.ibm.com/developerworks/cn/linux/l-ipc/part6/  </li>
+<li>http://limboy.me/tech/2010/08/27/php-process-control.html</li>
+</ul>
 <!-- content end -->
 </div>
 <br>
