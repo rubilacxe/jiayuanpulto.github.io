@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+&ensp;&ensp;&ensp;&ensp;之前用php分析日志，单个进程太慢，就准备开多个进程试试。每天需要处理大概100个文件，每个文件一百万行左右，开启三个进程（进程数视服务器情况定）需要的时间约为之前的1/3。
+
+##IPC简介##
+
+&ensp;&ensp;&ensp;&ensp;进程间通信（IPC，Inter-Process Communication），指至少两个进程或线程间传送数据或信号的一些技术或方法。进程是计算机系统分配资源的最小单位(严格说来是线程)。每个进程都有自己的一部分独立的系统资源，彼此是隔离的。为了能使不同的进程互相访问资源并进行协调工作，才有了进程间通信。
+![](http://ww3.sinaimg.cn/mw690/6e54bd9fgw1exv3qaohxej20b106dweo.jpg)
+
+- 最初Unix IPC包括：管道、FIFO、信号；
+
+- System V IPC包括：System V消息队列、System V信号灯、System V共享内存区；
+
+- Posix IPC包括： Posix消息队列、Posix信号灯、Posix共享内存区；
+
+&ensp;&ensp;&ensp;&ensp;其中Posix IPC为电子电气工程协会（IEEE）开发的一个独立的Unix标准，这个新的ANSI Unix标准被称为计算机环境的可移植性操作系统界面（PSOIX）。现有大部分Unix和流行版本都是遵循POSIX标准的，而Linux从一开始就遵循POSIX标准。
+
+##IPC方式##
+
+- 管道（Pipe）及有名管道（named pipe）：管道可用于具有亲缘关系进程间的通信，有名管道克服了管道没有名字的限制，因此，除具有管道所具有的功能外，它还允许无亲缘关系进程间的通信；
+
+- 信号（Signal）：信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程间通信外，进程还可以发送信号给进程本身；linux除了支持Unix早期信号语义函数sigal外，还支持语义符合Posix.1标准的信号函数sigaction（实际上，该函数是基于BSD的，BSD为了实现可靠信号机制，又能够统一对外接口，用sigaction函数重新实现了signal函数）；
+
+- 报文（Message）队列（消息队列）：消息队列是消息的链接表，包括Posix消息队列system V消息队列。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点。
+
+- 共享内存：使得多个进程可以访问同一块内存空间，是最快的可用IPC形式。是针对其他通信机制运行效率较低而设计的。往往与其它通信机制，如信号量结合使用，来达到进程间的同步及互斥。
+
+- 信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。
+
+- 套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：Linux和System V的变种都支持套接字。
+
+##PHP多进程实现##
+
+&ensp;&ensp;&ensp;&ensp;下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的。  
+![](http://ww2.sinaimg.cn/small/6e54bd9fgw1exv4c8to00j20cs09r75f.jpg)
+
+###管道###
+
+实例1(`popen()`实例)：  
+
+    <?php
+    function run() {
+        global $p_number;
+        if ($p_number <= 0)
+            $p_number = worker_processes($p_number);
+        $p_number = $p_number - 1;
+        $out = popen("/bin/sh /tmp.sh  &", "r");
+        pclose($out);
+    }
+ 
+    function worker_processes($p_number) {
+        $limit = 500;//允许最大进程数
+        while ($p_number <= 0) {
+            $cmd = popen("ps -ef | grep '/tmp.sh' | grep -v grep | wc -l", "r");
+            $line = fread($cmd, 512);
+            pclose($cmd);
+            $p_number = $limit - $line;
+            if ($p_number <= 0)
+                sleep(1);//暂停1秒钟
+        }
+        return $p_number;
+    }
+
+    for ($i = 1; $i <= 1000; $i++) {
+        run();
+        echo "Idle process number: " . $p_number . "\n";
+    }
+    ?>  
+
+实例2(`proc_open()`实例)
+
+    <?php
+    $descriptorspec = array(
+       0 => array("pipe", "r"),  // 标准输入，子进程从此管道中读取数据
+       1 => array("pipe", "w"),  // 标准输出，子进程向此管道中写入数据
+       2 => array("file", "/error.txt", "a") // 标准错误，写入到一个文件
+    );
+    
+    $cwd = '/usr/home/***';
+    //$pipes为索引数组，为被执行程序创建的管道对应到PHP这一端的文件指针
+    //$cwd是执行命令的初始工作目录，默认当前PHP进程的工作目录
+    $process = proc_open('php', $descriptorspec, $pipes, $cwd, null);
+    if (is_resource($process)) {
+        //$st1 = stream_set_blocking($pipes[0], 0);
+        //$st2 = stream_set_blocking($pipes[1], 0);
+        //var_dump($pipes[0]);
+        //var_dump($pipes[1]);
+        //var_dump($st1);
+        //var_dump($st2);
+        // $pipes 现在看起来是这样的：
+        // 0 => 可以向子进程标准输入写入的句柄
+        // 1 => 可以从子进程标准输出读取的句柄
+        // 错误输出将被追加到文件 /error.txt
+        fwrite($pipes[0], '<?php sleep(60); echo "test"; ?>');
+        echo "hello";
+        fclose($pipes[0]);
+    
+        echo stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        
+        $return_value = proc_close($process);
+        echo "command returned $return_value\n";
+    }
+    ?>
+
+&ensp;&ensp;&ensp;&ensp;PHP中管道相关的函数包括`popen()`、`pclose()`、`proc_open()`等。popen会创建一个管道来连接该进程，然后使用fread/fgets/stream\_get\_contents来读取该进程返回的结果。跟 exec或system之类的函数不同的是，exec会等待命令执行完成，再运行下面的代码（阻塞），但popen不会。proc\_open又更加强大一些，支持 stdin和stdout，路径设置等等。popen是异步的，可以同时开启多个进程， proc\_open是同步的，只能等上一个进程执行完成才能继续下一个。
+
+###信号###
+
+    <?php
+    //适用ticks需要PHP 4.3.0以上
+    declare(ticks = 1);
+    
+    //信号处理函数
+    function sig_handler($signo) {
+    	switch ($signo) {
+            case SIGUSR1:
+                echo "Caught SIGUSR1...\n";
+                break;
+            default:
+                //处理所有其他信号
+    	}
+    }
+    echo "Installing signal handler...\n";
+    
+    //安装信号处理函数
+    pcntl_signal(SIGUSR1, "sig_handler");
+    
+    //向当前进程发送SIGUSR1信号
+    posix_kill(posix_getpid(), SIGUSR1);
+    
+    echo "Done\n"
+    ?>
+
+&ensp;&ensp;&ensp;&ensp;PHP中信号相关的函数包括`declare(ticks=1)`、`pcntl_signal()`、`posix_kill()`等。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>    之前用php分析日志，单个进程太慢，就准备开多个进程试试。每天需要处理大概100个文件，每个文件一百万行左右，开启三个进程（进程数视服务器情况定）需要的时间约为之前的1/3。</p>
+
+<h2 id="ipc">IPC简介</h2>
+
+<p>    进程间通信（IPC，Inter-Process Communication），指至少两个进程或线程间传送数据或信号的一些技术或方法。进程是计算机系统分配资源的最小单位(严格说来是线程)。每个进程都有自己的一部分独立的系统资源，彼此是隔离的。为了能使不同的进程互相访问资源并进行协调工作，才有了进程间通信。
+<img src="http://ww3.sinaimg.cn/mw690/6e54bd9fgw1exv3qaohxej20b106dweo.jpg" alt="" title=""></p>
+
+<ul>
+<li><p>最初Unix IPC包括：管道、FIFO、信号；</p></li>
+<li><p>System V IPC包括：System V消息队列、System V信号灯、System V共享内存区；</p></li>
+<li><p>Posix IPC包括： Posix消息队列、Posix信号灯、Posix共享内存区；</p></li>
+</ul>
+
+<p>    其中Posix IPC为电子电气工程协会（IEEE）开发的一个独立的Unix标准，这个新的ANSI Unix标准被称为计算机环境的可移植性操作系统界面（PSOIX）。现有大部分Unix和流行版本都是遵循POSIX标准的，而Linux从一开始就遵循POSIX标准。</p>
+
+<h2 id="ipc">IPC方式</h2>
+
+<ul>
+<li><p>管道（Pipe）及有名管道（named pipe）：管道可用于具有亲缘关系进程间的通信，有名管道克服了管道没有名字的限制，因此，除具有管道所具有的功能外，它还允许无亲缘关系进程间的通信；</p></li>
+<li><p>信号（Signal）：信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程间通信外，进程还可以发送信号给进程本身；linux除了支持Unix早期信号语义函数sigal外，还支持语义符合Posix.1标准的信号函数sigaction（实际上，该函数是基于BSD的，BSD为了实现可靠信号机制，又能够统一对外接口，用sigaction函数重新实现了signal函数）；</p></li>
+<li><p>报文（Message）队列（消息队列）：消息队列是消息的链接表，包括Posix消息队列system V消息队列。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p></li>
+<li><p>共享内存：使得多个进程可以访问同一块内存空间，是最快的可用IPC形式。是针对其他通信机制运行效率较低而设计的。往往与其它通信机制，如信号量结合使用，来达到进程间的同步及互斥。</p></li>
+<li><p>信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。</p></li>
+<li><p>套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：Linux和System V的变种都支持套接字。</p></li>
+</ul>
+
+<h2 id="php">PHP多进程实现</h2>
+
+<p>    下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的。 <br>
+<img src="http://ww2.sinaimg.cn/small/6e54bd9fgw1exv4c8to00j20cs09r75f.jpg" alt="" title=""></p>
+
+<h3 id="">管道</h3>
+
+<p>实例1(<code>popen()</code>实例)：  </p>
+
+<pre><code>&lt;?php
+function run() {
+    global $p_number;
+    if ($p_number &lt;= 0)
+        $p_number = worker_processes($p_number);
+    $p_number = $p_number - 1;
+    $out = popen("/bin/sh /tmp.sh  &amp;", "r");
+    pclose($out);
+}
+
+function worker_processes($p_number) {
+    $limit = 500;//允许最大进程数
+    while ($p_number &lt;= 0) {
+        $cmd = popen("ps -ef | grep '/tmp.sh' | grep -v grep | wc -l", "r");
+        $line = fread($cmd, 512);
+        pclose($cmd);
+        $p_number = $limit - $line;
+        if ($p_number &lt;= 0)
+            sleep(1);//暂停1秒钟
+    }
+    return $p_number;
+}
+
+for ($i = 1; $i &lt;= 1000; $i++) {
+    run();
+    echo "Idle process number: " . $p_number . "\n";
+}
+?&gt;  
+</code></pre>
+
+<p>实例2(<code>proc_open()</code>实例)</p>
+
+<pre><code>&lt;?php
+$descriptorspec = array(
+   0 =&gt; array("pipe", "r"),  // 标准输入，子进程从此管道中读取数据
+   1 =&gt; array("pipe", "w"),  // 标准输出，子进程向此管道中写入数据
+   2 =&gt; array("file", "/error.txt", "a") // 标准错误，写入到一个文件
+);
+
+$cwd = '/usr/home/***';
+//$pipes为索引数组，为被执行程序创建的管道对应到PHP这一端的文件指针
+//$cwd是执行命令的初始工作目录，默认当前PHP进程的工作目录
+$process = proc_open('php', $descriptorspec, $pipes, $cwd, null);
+if (is_resource($process)) {
+    //$st1 = stream_set_blocking($pipes[0], 0);
+    //$st2 = stream_set_blocking($pipes[1], 0);
+    //var_dump($pipes[0]);
+    //var_dump($pipes[1]);
+    //var_dump($st1);
+    //var_dump($st2);
+    // $pipes 现在看起来是这样的：
+    // 0 =&gt; 可以向子进程标准输入写入的句柄
+    // 1 =&gt; 可以从子进程标准输出读取的句柄
+    // 错误输出将被追加到文件 /error.txt
+    fwrite($pipes[0], '&lt;?php sleep(60); echo "test"; ?&gt;');
+    echo "hello";
+    fclose($pipes[0]);
+
+    echo stream_get_contents($pipes[1]);
+    fclose($pipes[1]);
+
+    $return_value = proc_close($process);
+    echo "command returned $return_value\n";
+}
+?&gt;
+</code></pre>
+
+<p>    PHP中管道相关的函数包括<code>popen()</code>、<code>pclose()</code>、<code>proc_open()</code>等。popen会创建一个管道来连接该进程，然后使用fread/fgets/stream_get_contents来读取该进程返回的结果。跟 exec或system之类的函数不同的是，exec会等待命令执行完成，再运行下面的代码（阻塞），但popen不会。proc_open又更加强大一些，支持 stdin和stdout，路径设置等等。popen是异步的，可以同时开启多个进程， proc_open是同步的，只能等上一个进程执行完成才能继续下一个。</p>
+
+<h3 id="">信号</h3>
+
+<pre><code>&lt;?php
+//适用ticks需要PHP 4.3.0以上
+declare(ticks = 1);
+
+//信号处理函数
+function sig_handler($signo) {
+    switch ($signo) {
+        case SIGUSR1:
+            echo "Caught SIGUSR1...\n";
+            break;
+        default:
+            //处理所有其他信号
+    }
+}
+echo "Installing signal handler...\n";
+
+//安装信号处理函数
+pcntl_signal(SIGUSR1, "sig_handler");
+
+//向当前进程发送SIGUSR1信号
+posix_kill(posix_getpid(), SIGUSR1);
+
+echo "Done\n"
+?&gt;
+</code></pre>
+
+<p>    PHP中信号相关的函数包括<code>declare(ticks=1)</code>、<code>pcntl_signal()</code>、<code>posix_kill()</code>等。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>I am looking for a job!!!</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "fork.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
