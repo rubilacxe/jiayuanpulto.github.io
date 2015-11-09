@@ -56,10 +56,10 @@
 
 ##PHP多进程实现##
 
-&ensp;&ensp;&ensp;&ensp;下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的。  
+&ensp;&ensp;&ensp;&ensp;下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的扩展。  
 ![](http://ww2.sinaimg.cn/small/6e54bd9fgw1exv4c8to00j20cs09r75f.jpg)
 
-###管道###
+##管道##
 
 实例1(`popen()`实例)：  
 
@@ -130,7 +130,7 @@
 
 &ensp;&ensp;&ensp;&ensp;PHP中管道相关的函数包括`popen()`、`pclose()`、`proc_open()`等。popen会创建一个管道来连接该进程，然后使用fread/fgets/stream\_get\_contents来读取该进程返回的结果。跟 exec或system之类的函数不同的是，exec会等待命令执行完成，再运行下面的代码（阻塞），但popen不会。proc\_open又更加强大一些，支持 stdin和stdout，路径设置等等。popen是异步的，可以同时开启多个进程， proc\_open是同步的，只能等上一个进程执行完成才能继续下一个。
 
-###信号###
+##信号##
 
     <?php
     //适用ticks需要PHP 4.3.0以上
@@ -159,7 +159,118 @@
 
 &ensp;&ensp;&ensp;&ensp;PHP中信号相关的函数包括`declare(ticks=1)`、`pcntl_signal()`、`posix_kill()`等。
 
+##消息队列##
 
+    <?php
+    //将一个可访问的文件路径名转换为一个可供其他函数使用的整数
+    //第二个参数必须是一个字符串，这个参数其实就是读写方式
+    $message_queue_key = ftok(__FILE__, 'a');
+    $message_queue = msg_get_queue($message_queue_key, 0666);
+    /*msg_get_queue()会根据传入的键值返回一个消息队列的引用。
+    如果linux系统中没有消息队列与键值对应，将会创建一个新的消息队列。如果已经存在，则返回
+    新的引用，但是与之前的引用操作的同一个队列。
+    第二个参数需要传入一个int值，作为新创建的消息队列的权限值，默认为0666。*/
+    $pid = pcntl_fork();
+    if ($pid==-1) {
+        die("cannot fork");
+    } 
+    else if ($pid) {
+        pcntl_wait($status);
+        //读取消息队列中的内容
+        msg_receive($message_queue, 0, $message_type, 1024, $message, true, MSG_IPC_NOWAIT);
+        echo $message;
+    } 
+    else {
+        $pid = posix_getpid();
+        //向消息队列中写
+        msg_send($message_queue, 1, "this is process $pid's data\r\n");
+    }
+    ?>
+
+
+&ensp;&ensp;&ensp;&ensp;消息队列就是一个消息的链表。可以把消息看作一个记录，具有特定的格式以及特定的优先级。对消息队列有写权限的进程可以向中按照一定的规则添加新消息；对消息队列有读权限的进程则可以从消息队列中读走消息。实际应用中使用最多的是memcache与redis中的消息队列。
+
+##信号量##
+
+    <?php
+        $key = ftok(__FILE__, 'a');
+        //同时最多只能有一个进程进入临界区
+        $sem_id = sem_get($key, 1);
+        echo "This is a room，can only stay one people!\n\r";
+        //派生子进程
+        $pid = pcntl_fork();
+        if ($pid == -1) {
+            exit('fork failed!');
+        } else if ($pid > 0) {
+            $name = 'parent';
+        } else {
+            $name = 'child';
+        }
+        echo "{$name} want to enter the room \n";
+        sem_acquire($sem_id);
+        //临界区，一个时间片只能有一个进程进入
+        echo "{$name} in the room , other people can't enter!\n";
+        sleep(3);
+        echo "{$name} leave the room\n";
+        //临界区结束
+        //释放信号量,其他进程可以进入临界区
+        sem_release($sem_id);
+        if ($pid > 0) {
+            pcntl_waitpid($pid, $status);
+            sem_remove($sem_id);//移除信号量
+        }
+    ?>
+
+&ensp;&ensp;&ensp;&ensp;信号灯与其他进程间通信方式不大相同，它主要提供对进程间共享资源访问控制机制。相当于内存中的标志，进程可以根据它判定是否能够访问某些共享资源，同时，进程也可以修改该标志。除了用于访问控制外，还可用于进程同步。
+
+##共享内存##
+
+    <?php
+    //将一个可访问的文件路径名转换为一个可供其他函数使用的整数
+    $shm_key = ftok(__FILE__, 'a');
+    $semid=sem_get($shm_key, 1, 0666); //设置信号量互斥
+    $shm_id = shmop_open($shm_key, "c", 0644, 10); //申请10个字节的共享内存块
+    if (!sem_acquire($semid)) {
+        die("申请共享内存失败\r\n");
+    }
+    else {
+        echo "申请共享内存成功\r\n";
+    }
+    //进入临界区
+    $my_string = 'hello_world';
+    $shm_bytes_written = shmop_write($shm_id, $my_string, 0); //写入共享内存
+    $shm_data = shmop_read($shm_id, 0, 10); //读取共享内存
+    $shm_size = shmop_size($shm_id); //取得共享内存大小
+    sem_release($semid); //释放信号量
+    shmop_delete($shm_id); //删除共享内存片段
+    shmop_close($shm_id); //断开映射
+    
+    echo 'key:' . $shm_key . "\r\n";
+    echo 'string:' . $my_string . "\r\n";
+    echo 'write:' . $shm_bytes_written . "\r\n";
+    echo 'read:' . $shm_data . "\r\n";
+    echo 'size:' . $shm_size . "\r\n";
+    ?>
+
+&ensp;&ensp;&ensp;&ensp;共享内存允许两个或多个进程共享一给定的存储区，因为数据不需要来回复制，所以是最快的一种进程间通信机制。共享内存可以通过映射普通文件机制实现，也可以通过系统V共享内存机制实现。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域。而是保持共享区域，直到通信完毕为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除映射时才写回文件的。
+
+##套接口##
+
+    <?php
+    //创建一个套接字（通讯节点）
+    //第一个参数指定哪个协议用在当前套接字上
+    //第二个参数用于选择套接字使用的类型
+    //第三个参数指定套接字下的具体协议
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+    //给套接字绑定名字
+    socket_bind($socket, 'localhost', 1337);
+    //监听
+    socket_listen($socket);
+    //下面为处理接收到的信息
+    //可使用socket_read()接收信息
+    ?>
+
+&ensp;&ensp;&ensp;&ensp;消息队列、信号灯、共享内存等，都是基于Sys V的IPC机制进行讨论的，它们的应用局限在单一计算机内的进程间通信；基于BSD套接口不仅可以实现单机内的进程间通信，还可以实现不同计算机进程之间的通信。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。
 
 
 
@@ -206,10 +317,10 @@
 
 <h2 id="php">PHP多进程实现</h2>
 
-<p>    下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的。 <br>
+<p>    下图为PHP的进程控制扩展，后面的程序涉及 到的为红框中的扩展。 <br>
 <img src="http://ww2.sinaimg.cn/small/6e54bd9fgw1exv4c8to00j20cs09r75f.jpg" alt="" title=""></p>
 
-<h3 id="">管道</h3>
+<h2 id="">管道</h2>
 
 <p>实例1(<code>popen()</code>实例)：  </p>
 
@@ -282,7 +393,7 @@ if (is_resource($process)) {
 
 <p>    PHP中管道相关的函数包括<code>popen()</code>、<code>pclose()</code>、<code>proc_open()</code>等。popen会创建一个管道来连接该进程，然后使用fread/fgets/stream_get_contents来读取该进程返回的结果。跟 exec或system之类的函数不同的是，exec会等待命令执行完成，再运行下面的代码（阻塞），但popen不会。proc_open又更加强大一些，支持 stdin和stdout，路径设置等等。popen是异步的，可以同时开启多个进程， proc_open是同步的，只能等上一个进程执行完成才能继续下一个。</p>
 
-<h3 id="">信号</h3>
+<h2 id="">信号</h2>
 
 <pre><code>&lt;?php
 //适用ticks需要PHP 4.3.0以上
@@ -311,6 +422,122 @@ echo "Done\n"
 </code></pre>
 
 <p>    PHP中信号相关的函数包括<code>declare(ticks=1)</code>、<code>pcntl_signal()</code>、<code>posix_kill()</code>等。</p>
+
+<h2 id="">消息队列</h2>
+
+<pre><code>&lt;?php
+//将一个可访问的文件路径名转换为一个可供其他函数使用的整数
+//第二个参数必须是一个字符串，这个参数其实就是读写方式
+$message_queue_key = ftok(__FILE__, 'a');
+$message_queue = msg_get_queue($message_queue_key, 0666);
+/*msg_get_queue()会根据传入的键值返回一个消息队列的引用。
+如果linux系统中没有消息队列与键值对应，将会创建一个新的消息队列。如果已经存在，则返回
+新的引用，但是与之前的引用操作的同一个队列。
+第二个参数需要传入一个int值，作为新创建的消息队列的权限值，默认为0666。*/
+$pid = pcntl_fork();
+if ($pid==-1) {
+    die("cannot fork");
+} 
+else if ($pid) {
+    pcntl_wait($status);
+    //读取消息队列中的内容
+    msg_receive($message_queue, 0, $message_type, 1024, $message, true, MSG_IPC_NOWAIT);
+    echo $message;
+} 
+else {
+    $pid = posix_getpid();
+    //向消息队列中写
+    msg_send($message_queue, 1, "this is process $pid's data\r\n");
+}
+?&gt;
+</code></pre>
+
+<p>    消息队列就是一个消息的链表。可以把消息看作一个记录，具有特定的格式以及特定的优先级。对消息队列有写权限的进程可以向中按照一定的规则添加新消息；对消息队列有读权限的进程则可以从消息队列中读走消息。实际应用中使用最多的是memcache与redis中的消息队列。</p>
+
+<h2 id="">信号量</h2>
+
+<pre><code>&lt;?php
+    $key = ftok(__FILE__, 'a');
+    //同时最多只能有一个进程进入临界区
+    $sem_id = sem_get($key, 1);
+    echo "This is a room，can only stay one people!\n\r";
+    //派生子进程
+    $pid = pcntl_fork();
+    if ($pid == -1) {
+        exit('fork failed!');
+    } else if ($pid &gt; 0) {
+        $name = 'parent';
+    } else {
+        $name = 'child';
+    }
+    echo "{$name} want to enter the room \n";
+    sem_acquire($sem_id);
+    //临界区，一个时间片只能有一个进程进入
+    echo "{$name} in the room , other people can't enter!\n";
+    sleep(3);
+    echo "{$name} leave the room\n";
+    //临界区结束
+    //释放信号量,其他进程可以进入临界区
+    sem_release($sem_id);
+    if ($pid &gt; 0) {
+        pcntl_waitpid($pid, $status);
+        sem_remove($sem_id);//移除信号量
+    }
+?&gt;
+</code></pre>
+
+<p>    信号灯与其他进程间通信方式不大相同，它主要提供对进程间共享资源访问控制机制。相当于内存中的标志，进程可以根据它判定是否能够访问某些共享资源，同时，进程也可以修改该标志。除了用于访问控制外，还可用于进程同步。</p>
+
+<h2 id="">共享内存</h2>
+
+<pre><code>&lt;?php
+//将一个可访问的文件路径名转换为一个可供其他函数使用的整数
+$shm_key = ftok(__FILE__, 'a');
+$semid=sem_get($shm_key, 1, 0666); //设置信号量互斥
+$shm_id = shmop_open($shm_key, "c", 0644, 10); //申请10个字节的共享内存块
+if (!sem_acquire($semid)) {
+    die("申请共享内存失败\r\n");
+}
+else {
+    echo "申请共享内存成功\r\n";
+}
+//进入临界区
+$my_string = 'hello_world';
+$shm_bytes_written = shmop_write($shm_id, $my_string, 0); //写入共享内存
+$shm_data = shmop_read($shm_id, 0, 10); //读取共享内存
+$shm_size = shmop_size($shm_id); //取得共享内存大小
+sem_release($semid); //释放信号量
+shmop_delete($shm_id); //删除共享内存片段
+shmop_close($shm_id); //断开映射
+
+echo 'key:' . $shm_key . "\r\n";
+echo 'string:' . $my_string . "\r\n";
+echo 'write:' . $shm_bytes_written . "\r\n";
+echo 'read:' . $shm_data . "\r\n";
+echo 'size:' . $shm_size . "\r\n";
+?&gt;
+</code></pre>
+
+<p>    共享内存允许两个或多个进程共享一给定的存储区，因为数据不需要来回复制，所以是最快的一种进程间通信机制。共享内存可以通过映射普通文件机制实现，也可以通过系统V共享内存机制实现。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域。而是保持共享区域，直到通信完毕为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除映射时才写回文件的。</p>
+
+<h2 id="">套接口</h2>
+
+<pre><code>&lt;?php
+//创建一个套接字（通讯节点）
+//第一个参数指定哪个协议用在当前套接字上
+//第二个参数用于选择套接字使用的类型
+//第三个参数指定套接字下的具体协议
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+//给套接字绑定名字
+socket_bind($socket, 'localhost', 1337);
+//监听
+socket_listen($socket);
+//下面为处理接收到的信息
+//可使用socket_read()接收信息
+?&gt;
+</code></pre>
+
+<p>    消息队列、信号灯、共享内存等，都是基于Sys V的IPC机制进行讨论的，它们的应用局限在单一计算机内的进程间通信；基于BSD套接口不仅可以实现单机内的进程间通信，还可以实现不同计算机进程之间的通信。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。一个套接口可以看作是进程间通信的端点（endpoint），每个套接口的名字都是唯一的（唯一的含义是不言而喻的），其他进程可以发现、连接并且与之通信。通信域用来说明套接口通信的协议，不同的通信域有不同的通信协议以及套接口的地址结构等等，因此，创建一个套接口时，要指明它的通信域。</p>
 <!-- content end -->
 </div>
 <br>
