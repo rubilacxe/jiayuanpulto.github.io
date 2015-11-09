@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+&ensp;&ensp;&ensp;&ensp;在搬瓦工买了个服务器，搭个环境玩。之前一直想折腾个博客，懒人各种没治。。。偶然间看到这个http://yongyuan.name/blog/collect-jekyll-theme.html，有很多不错的模板可以用，对于我这种JS与CSS新手来说还是不错的选择。接下来就是在服务器上安装jekyll（github支持jekyll）。
+
+- 系统：CentOS release 6.7 (Final)；  
+- nginx安装:  http://my.oschina.net/VincentJiang/blog/224993；  
+- jekyll安装： yum install ruby，yum install rubygems，yum install ruby-devel，gem install jekyll提示版本太低（ruby version>1.9.5）；  
+- ruby安装：https://gist.github.com/mustafaturan/8290150；
+- nodejs安装：http://www.jianshu.com/p/783906f10d58；
+- jekyll安装：/usr/local/bin/gem install jekyll；
+
+&ensp;&ensp;&ensp;&ensp;jekyll官方文档：http://jekyllcn.com/docs/configuration/，创建项目，配置nginx即可访问博客~~~
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>    在搬瓦工买了个服务器，搭个环境玩。之前一直想折腾个博客，懒人各种没治。。。偶然间看到这个http://yongyuan.name/blog/collect-jekyll-theme.html，有很多不错的模板可以用，对于我这种JS与CSS新手来说还是不错的选择。接下来就是在服务器上安装jekyll（github支持jekyll）。</p>
+
+<ul>
+<li>系统：CentOS release 6.7 (Final)；  </li>
+<li>nginx安装:  http://my.oschina.net/VincentJiang/blog/224993；  </li>
+<li>jekyll安装： yum install ruby，yum install rubygems，yum install ruby-devel，gem install jekyll提示版本太低（ruby version&gt;1.9.5）；  </li>
+<li>ruby安装：https://gist.github.com/mustafaturan/8290150；</li>
+<li>nodejs安装：http://www.jianshu.com/p/783906f10d58；</li>
+<li>jekyll安装：/usr/local/bin/gem install jekyll；</li>
+</ul>
+
+<p>    jekyll官方文档：http://jekyllcn.com/docs/configuration/，创建项目，配置nginx即可访问博客~~~</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>I am looking for a job!!!</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "jekyll.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
