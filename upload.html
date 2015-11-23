@@ -34,18 +34,17 @@
     <script language="javaScript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(function () { //$("document").ready(function () { //确保元素可选择
-    $("#file_one input").on("change", function () {
-    //$("#file_one form").submit(); //提交表单，跳转upload.php页面
-    iframeDate($("#file_one")); //iframe模拟异步上传   
-    });
-    $("#file_two input").on("change", function () {
-    postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
-    });
-    
+        $("#file_one input").on("change", function () {
+            //$("#file_one form").submit(); //提交表单，跳转upload.php页面
+            iframeDate($("#file_one")); //iframe模拟异步上传   
+        });
+        $("#file_two input").on("change", function () {
+            postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
+        });
     });
     function iframeDate (divObj) {
-    if ($("iframe[name=uploadIframe]").length == 0)
-    $('<iframe style="display:none" name="uploadIframe"/></iframe>').appendTo(divObj);
+        if ($("iframe[name=uploadIframe]").length == 0) //防止重复加入iframe
+            $('<iframe style="display:none" name="uploadIframe"/></iframe>').appendTo(divObj);
         divObj.find("form").attr("action", "upload.php").attr("target", "uploadIframe").submit();
         
         $('iframe[name=uploadIframe]').load(function () { //等待iframe加载完毕
@@ -111,18 +110,17 @@
 &lt;script language="javaScript" src="http://code.jquery.com/jquery-1.11.3.min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 $(function () { //$("document").ready(function () { //确保元素可选择
-$("#file_one input").on("change", function () {
-//$("#file_one form").submit(); //提交表单，跳转upload.php页面
-iframeDate($("#file_one")); //iframe模拟异步上传   
-});
-$("#file_two input").on("change", function () {
-postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
-});
-
+    $("#file_one input").on("change", function () {
+        //$("#file_one form").submit(); //提交表单，跳转upload.php页面
+        iframeDate($("#file_one")); //iframe模拟异步上传   
+    });
+    $("#file_two input").on("change", function () {
+        postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
+    });
 });
 function iframeDate (divObj) {
-if ($("iframe[name=uploadIframe]").length == 0)
-$('&lt;iframe style="display:none" name="uploadIframe"/&gt;&lt;/iframe&gt;').appendTo(divObj);
+    if ($("iframe[name=uploadIframe]").length == 0) //防止重复加入iframe
+        $('&lt;iframe style="display:none" name="uploadIframe"/&gt;&lt;/iframe&gt;').appendTo(divObj);
     divObj.find("form").attr("action", "upload.php").attr("target", "uploadIframe").submit();
 
     $('iframe[name=uploadIframe]').load(function () { //等待iframe加载完毕
