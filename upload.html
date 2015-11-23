@@ -8,14 +8,6 @@
     <title>Simple</title>
     <link rel="shortcut icon" href="/static/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="/main.css" />
-    <link href="/prettify.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="/prettify.js"></script>
-    <script type="text/javascript">
-    	$(function() {
-  		prettyPrint();
-  		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto');
-	});
-    </script>
 </head>
 <body>
 <div class="main">
@@ -35,7 +27,7 @@
 <!-- markdown -->
 &nbsp;&nbsp;&nbsp;&nbsp;之前接触到的图片上传使用的是html的form提交方法，是时候了解下其他的上传方法了。网上看了看，现在主要是三种方法上传图片，一种是html+form，一种是html5的formdata，另外一种是flash。对于flash的方法最不熟悉了，看了下uploadify.com的demo，chrom正常，firefox由于flash插件安装不正确显示异常。下面的例子只有前两种方法。
 
-    <code class="prettyprint">
+    <pre class="prettyPrint">
     <!DOCTYPE html>
     <html>
     <head>
@@ -101,14 +93,14 @@
        
     </body>
     </html>
-    </code>
+    </pre>
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
 <!-- content -->
 <p>&nbsp;&nbsp;&nbsp;&nbsp;之前接触到的图片上传使用的是html的form提交方法，是时候了解下其他的上传方法了。网上看了看，现在主要是三种方法上传图片，一种是html+form，一种是html5的formdata，另外一种是flash。对于flash的方法最不熟悉了，看了下uploadify.com的demo，chrom正常，firefox由于flash插件安装不正确显示异常。下面的例子只有前两种方法。</p>
 
-<pre><code>&lt;code class="prettyprint"&gt;
+<pre><code>&lt;pre class="prettyPrint"&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -174,7 +166,7 @@ img { height:200px; length:200px;}
 
 &lt;/body&gt;
 &lt;/html&gt;
-&lt;/code&gt;
+&lt;/pre&gt;
 </code></pre>
 <!-- content end -->
 </div>
@@ -244,13 +236,6 @@ $(document).ready(function() {
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
-<script type="text/javascript" src="/prettify.js"></script>
-<script type="text/javascript">
-    $(function() {
-  	prettyPrint();
-  	$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto');
-    });
 </script>
 </body>
 </html>
