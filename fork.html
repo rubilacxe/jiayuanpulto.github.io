@@ -8,6 +8,7 @@
     <title>Simple</title>
     <link rel="shortcut icon" href="/static/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link href="/prettify.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <div class="main">
@@ -61,7 +62,8 @@
 
 ##管道##
 
-实例1(`popen()`实例)：  
+实例1(`popen()`实例)：
+<pre class="prettyprint">
 
     <?php
     function run() {
@@ -91,7 +93,7 @@
         echo "Idle process number: " . $p_number . "\n";
     }
     ?>  
-
+</pre>
 实例2(`proc_open()`实例)
 
     <?php
@@ -620,5 +622,7 @@ $(document).ready(function() {
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
 </script>
+<script type="text/javascript" src="/prettify.js"></script>
+<script type="text/javascript">$(function() { prettyPrint();});</script>
 </body>
 </html>
