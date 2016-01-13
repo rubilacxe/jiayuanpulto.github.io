@@ -1,67 +1,51 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
-    <title>Simple</title>
-    <link rel="shortcut icon" href="/static/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+<meta charset="utf-8">
+<title>jiayuan's blog</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-&nbsp;&nbsp;&nbsp;&nbsp;看到篇文章讲用gdb找出php程序出问题时正在执行的代码行(也可以分析core dump文件)，自己也来试试。  
-
-&nbsp;&nbsp;&nbsp;&nbsp;用yum安装的php5.4运行程序，gdb卡在“missing debuginfo-install libedit&&libidn”，使用“debuginfo-install”各种找不到安装包，谷歌了也没辙。。。  
-
-&nbsp;&nbsp;&nbsp;&nbsp;php7刚发布，正好安装试试，下载和安装都很快，安装了debug与非debug的两个版本，gdb测试的情况是一样的，可以使用php源码的根目录下.gdbinit文件来定位代码行。  
-
-    (gdb) source /root/php-7.0.1/.gdbinit
-    (gdb) zbacktrace
-    [0xb72140a0] sleep(1) [internal function]
-    [0xb7214060] test1() /root/test.php:5 
-    [0xb7214020] (main) /root/test.php:8   
-
-&nbsp;&nbsp;&nbsp;&nbsp;php7运行程序，使用gdb分析，“(gdb) print (char *) executor\_globals.active\_op\_array->filename”一直报错，“There is no member named active\_op\_array.”，谷歌之也没找到问题。
-
-###参考###
-- http://blogread.cn/it/article/7151?f=wb；
-- https://bugs.php.net/bugs-generating-backtrace.php；
-<!-- markdown end -->
-</div>
-<div class="entry" id="main">
+    <div class="container">
+        <div class="main_left">
+            <a href="index.html"><img class="avatar" src="mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="mail.png" /></a>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
 <!-- content -->
+<h2>php7与debug</h2>
+<div class="article_date"><p>2016-01-04</p></div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;看到篇文章讲用gdb找出php程序出问题时正在执行的代码行(也可以分析core dump文件)，自己也来试试。  </p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;用yum安装的php5.4运行程序，gdb卡在“missing debuginfo-install libedit&amp;&amp;libidn”，使用“debuginfo-install”各种找不到安装包，谷歌了也没辙。。。  </p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;php7刚发布，正好安装试试，下载和安装都很快，安装了debug与非debug的两个版本，gdb测试的情况是一样的，可以使用php源码的根目录下.gdbinit文件来定位代码行。  </p>
 
-<pre><code>(gdb) source /root/php-7.0.1/.gdbinit
+<pre  class="prettyprint">
+(gdb) source /root/php-7.0.1/.gdbinit
 (gdb) zbacktrace
 [0xb72140a0] sleep(1) [internal function]
 [0xb7214060] test1() /root/test.php:5 
 [0xb7214020] (main) /root/test.php:8   
-</code></pre>
+</pre  class="prettyprint">
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;php7运行程序，使用gdb分析，“(gdb) print (char *) executor_globals.active_op_array-&gt;filename”一直报错，“There is no member named active_op_array.”，谷歌之也没找到问题。</p>
 
-<h3 id="">参考</h3>
+<h3>参考</h3>
 
 <ul>
 <li>http://blogread.cn/it/article/7151?f=wb；</li>
@@ -69,72 +53,9 @@
 </ul>
 <!-- content end -->
 </div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>I am looking for a job!!!</p>
-	</div>
-</div>
-<script src="main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
+                </div>
+            </div>   
+        </div>
     </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "debug.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            }
-        }
-    });
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
 </body>
 </html>

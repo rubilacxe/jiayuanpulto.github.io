@@ -1,104 +1,37 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
-    <title>Simple</title>
-    <link rel="shortcut icon" href="/static/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+<meta charset="utf-8">
+<title>jiayuan's blog</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-&nbsp;&nbsp;&nbsp;&nbsp;之前接触到的图片上传使用的是html的form提交方法，是时候了解下其他的上传方法了。网上看了看，现在主要是三种方法上传图片，一种是html+form，一种是html5的formdata，另外一种是flash。对于flash的方法最不熟悉了，看了下uploadify.com的demo，chrom正常，firefox由于flash插件安装不正确显示异常。下面的例子只有前两种方法。
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>图片上传</title>
-    <script language="javaScript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript">
-    $(function () { //$("document").ready(function () { //确保元素可选择
-        $("#file_one input").on("change", function () {
-            //$("#file_one form").submit(); //提交表单，跳转upload.php页面
-            iframeDate($("#file_one")); //iframe模拟异步上传   
-        });
-        $("#file_two input").on("change", function () {
-            postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
-        });
-    });
-    function iframeDate (divObj) {
-        if ($("iframe[name=uploadIframe]").length == 0) //防止重复加入iframe
-            $('<iframe style="display:none" name="uploadIframe"/></iframe>').appendTo(divObj);
-        divObj.find("form").attr("action", "upload.php").attr("target", "uploadIframe").submit();
-        
-        $('iframe[name=uploadIframe]').load(function () { //等待iframe加载完毕
-            var url = $("iframe[name=uploadIframe]").contents()[0].body.innerHTML.replace(/\\/g,'').replace(/"/g,'');
-            divObj.find("img").attr("src", url).show();
-        }); 
-    }
-    function postData (inputObj, imgObj) {
-        var data = new FormData();
-        data.append("file", inputObj[0].files[0]);
-        $.ajax({  
-            url: 'upload.php',  
-            type: 'POST',  
-            data: data,  
-            dataType: 'JSON',  
-            cache: false,  
-            processData: false,  
-            contentType: false, 
-            success:function (url) {
-                imgObj.attr("src", url);
-                imgObj.attr("style", "display");
-            }
-        });
-    }
-    </script>
-    <style type="text/css">
-    .part { margin:50px 10px; background:#eaf3fa; border:1px solid #cbdeeb;}
-    input[type="file"] { margin:20px 20px;}
-    img { height:200px; length:200px;}
-    </style>
-    </head>
-    <body>
-    
-        <div class="part" id="file_one">
-            <form method="post" enctype="multipart/form-data">
-                iframe异步上传图片<input type="file" name="file"/>
-            </form>
-            <img src="" style="display:none"/>
+    <div class="container">
+        <div class="main_left">
+            <a href="index.html"><img class="avatar" src="mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="mail.png" /></a>
+            </div>
         </div>
-    
-        <div class="part" id="file_two">
-            html5-FormData异步上传图片<input type="file" name="file"/><br />
-            <img src="" style="display:none"/>
-        </div>
-       
-    </body>
-    </html>
-<!-- markdown end -->
-</div>
-<div class="entry" id="main">
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
 <!-- content -->
+<h2>图片上传</h2>
+<div class="article_date"><p>2015-11-23</p></div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;之前接触到的图片上传使用的是html的form提交方法，是时候了解下其他的上传方法了。网上看了看，现在主要是三种方法上传图片，一种是html+form，一种是html5的formdata，另外一种是flash。对于flash的方法最不熟悉了，看了下uploadify.com的demo，chrom正常，firefox由于flash插件安装不正确显示异常。下面的例子只有前两种方法。</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;图片上传&lt;/title&gt;
@@ -163,75 +96,12 @@ img { height:200px; length:200px;}
 
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
+</pre>
 <!-- content end -->
 </div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>I am looking for a job!!!</p>
-	</div>
-</div>
-<script src="main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
+                </div>
+            </div>   
+        </div>
     </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "upload.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            }
-        }
-    });
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
 </body>
 </html>

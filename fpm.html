@@ -1,56 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
-    <title>Simple</title>
-    <link rel="shortcut icon" href="/static/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+<meta charset="utf-8">
+<title>jiayuan's blog</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-&nbsp;&nbsp;&nbsp;&nbsp;之前项目的敏感信息（数据库配置、环境变量等）是通过nginx的fastcgi\_param来配置的，而没有使用php-fpm来配置，原因是方便运维（发布代码到平台，由平台来运维服务器）。虽然上述两种方法都可以通过`$_SERVER['DATABASE_HOST']`来获取数据，但是当配置信息通过nginx的fastcgi\_param来设置的话，当nginx和php交互时，会带来大量的数据传输，所以用php-fpm相对更好些。
-
-&nbsp;&nbsp;&nbsp;&nbsp;既然用到了，就来了解下CGI、FASTCGI、PHP-CGI及PHP-FPM的关系好了。
-
-&nbsp;&nbsp;&nbsp;&nbsp;CGI是个协议，是HTTP服务器（apache与nginx等）与机器上的其他程序的交流的协议（传递数据的格式等），有各种语言的版本，PHP-CGI就是实现了CGI协议的程序。FASTCGI是用来提高CGI程序性能的进程管理方法（单个CGI进程每次都需要初始化环境等比较费时间，FASTCGI方法则是先启动一个master进程，由master进程初始化环境，再启动多个worker进程来处理用户的请求），而PHP-FPM就是实现了这个方法的程序，其控制的worker进程就是PHP-CGI进程。
-
-&nbsp;&nbsp;&nbsp;&nbsp;修改配置文件php.ini后的平滑重启就是依赖于PHP-FPM。修改php.ini后，PHP-FPM让新启动的worker进程用新的配置，而正在运行的worker进程处理完任务后就kill掉，这样当旧的worker进程都kill掉之后就完成了平滑重启。
-
-&nbsp;&nbsp;&nbsp;&nbsp;一次请求的流程是这样的：
-
-1. nginx接到用户的请求，读取fastcgi\_param等配置信息，将其与请求的url等信息一起传递给PHP-FPM。
-
-2. PHP-FPM接到请求任务，将nginx传递过来的信息传递给其worker进程（PHP-CGI进程）来处理。
-
-3. PHP-CGI进程处理请求（可读取php-fpm配置信息），将处理结果返回给nginx，PHP-CGI进程结束。
-
-4. nginx接收到处理结果后将其传递给浏览器。
-
-###参考###
-- http://huoding.com/2013/07/19/268；
-- http://segmentfault.com/q/1010000000256516；
-<!-- markdown end -->
-</div>
-<div class="entry" id="main">
+    <div class="container">
+        <div class="main_left">
+            <a href="index.html"><img class="avatar" src="mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="mail.png" /></a>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
 <!-- content -->
-<p>&nbsp;&nbsp;&nbsp;&nbsp;之前项目的敏感信息（数据库配置、环境变量等）是通过nginx的fastcgi_param来配置的，而没有使用php-fpm来配置，原因是方便运维（发布代码到平台，由平台来运维服务器）。虽然上述两种方法都可以通过<code>$_SERVER['DATABASE_HOST']</code>来获取数据，但是当配置信息通过nginx的fastcgi_param来设置的话，当nginx和php交互时，会带来大量的数据传输，所以用php-fpm相对更好些。</p>
+<h2>FastCgi与PHP-fpm</h2>
+<div class="article_date"><p>2015-11-11</p></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;之前项目的敏感信息（数据库配置、环境变量等）是通过nginx的fastcgi_param来配置的，而没有使用php-fpm来配置，原因是方便运维（发布代码到平台，由平台来运维服务器）。虽然上述两种方法都可以通过$_SERVER['DATABASE_HOST']来获取数据，但是当配置信息通过nginx的fastcgi_param来设置的话，当nginx和php交互时，会带来大量的数据传输，所以用php-fpm相对更好些。</p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;既然用到了，就来了解下CGI、FASTCGI、PHP-CGI及PHP-FPM的关系好了。</p>
 
@@ -60,12 +39,12 @@
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;一次请求的流程是这样的：</p>
 
-<ol>
+<ul>
 <li><p>nginx接到用户的请求，读取fastcgi_param等配置信息，将其与请求的url等信息一起传递给PHP-FPM。</p></li>
 <li><p>PHP-FPM接到请求任务，将nginx传递过来的信息传递给其worker进程（PHP-CGI进程）来处理。</p></li>
 <li><p>PHP-CGI进程处理请求（可读取php-fpm配置信息），将处理结果返回给nginx，PHP-CGI进程结束。</p></li>
 <li><p>nginx接收到处理结果后将其传递给浏览器。</p></li>
-</ol>
+</ul>
 
 <h3 id="">参考</h3>
 
@@ -75,72 +54,9 @@
 </ul>
 <!-- content end -->
 </div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>I am looking for a job!!!</p>
-	</div>
-</div>
-<script src="main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
+                </div>
+            </div>   
+        </div>
     </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "fpm.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            }
-        }
-    });
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
 </body>
 </html>
