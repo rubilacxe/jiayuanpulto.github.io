@@ -75,6 +75,7 @@ body {
 }
 .entry h2 {
     text-align: center;
+    color: rgb(243,244,246);
 }
 .entry li {
     list-style-type: disc;
@@ -129,7 +130,6 @@ a {
 .overlay {
     background-color: rgb(173,195,192);
     height: 70px;
-    opacity: 0.7;
     position: absolute;
     width: 100%;
     left: 0;
