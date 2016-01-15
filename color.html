@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>色盘</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main_left">
+            <a href="/"><img class="avatar" src="image/mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
+<!-- content -->
+<h2>色盘</h2>
+<div class="article_date"><p>2016-01-15</p></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;偶然想做个页面的色彩效果，看了下色彩模式之类的，自己做个色盘好了，感觉挺炫酷的。</p>
+<img src="image/color4.png">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;RGB颜色立方体比较直观，三个维度分别是红绿蓝，坐标值从0到255，黑色的坐标为(0,0,0),白色的坐标为(255,255,255)。将这个立方体以两种不同的方式投射为圆柱体，就是HSL和HSV色彩空间了。HSL和HSV色彩空间的轴心都是与颜色立方体的(0,0,0)与(255,255,255)两个点的连线相对应的，不同的是，HSL是以与上述连线垂直的平面不断切割立方体，再把每一个切割的点或面（除去(0,0,0)与(255,255,255)两个点外，切割的面都是正三角形）投影到一个圆上，再把所有的圆拼接在一起，而HSV是将以(0,0,0)(1,1,1)...(244,244,244)(255,255,255)等一系列的点作为顶点的三个互相垂直的面投影到圆上再拼接（相当于一层一层的剥开正方体，一次剥去三个面）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最终html5的canvas画出来的图是这样的。</p>
+<img src="image/color3.png">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可以看出我画的是HSV色彩空间色盘，色盘下的调节按钮调节的是明度值（Value），将这些色盘组合起来就是HSV色彩空间了。前面说到HSV是以一种一层一层的剥开正方体的方式来组合形成的，这样就有两种剥的方式了，从黑色(0,0,0)开始剥和从白色(255,255,255)开始剥，我所画的图中，上面的色盘是从黑色(0,0,0)剥开的，下面的色盘是从白色(255,255,255)剥开的。
+具体的将三个面投影到一个圆上的方法见下图，再下面的图是将圆形投影到正方形的方法。</p>
+<img src="image/color1.png">
+<img src="image/color2.png">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;详细代码见：http://jiayuanpulto.github.io/test/color.html</p>
+
+<h3>参考</h3>
+<ul>
+<li>https://zh.wikipedia.org/wiki/HSL%E5%92%8CHSV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4</li>
+<li>https://zh.wikipedia.org/wiki/%E4%B8%89%E5%8E%9F%E8%89%B2%E5%85%89%E6%A8%A1%E5%BC%8F</li>
+</ul>
+<!-- content end -->
+</div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</body>
+</html>
