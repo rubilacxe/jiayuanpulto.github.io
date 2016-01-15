@@ -126,3 +126,10 @@ p, h1 {
 a {
     text-decoration: none;
 }
+.overlay {
+    background-color: #000;
+    height: 180px;
+    opacity: 0.7;
+    position: absolute;
+    width: 100%;
+}
