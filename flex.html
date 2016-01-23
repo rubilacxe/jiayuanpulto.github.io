@@ -34,7 +34,7 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;首先从最简单的float方式开始，在有border的情况下，且border宽度可变（以下例子中的border都设置高为20px,够显眼吧），九个格子必须上下左右对齐，因此要用box-sizing属性。实现出来的效果如下，乍看之下没啥问题。</p>
 <iframe src="http://jiayuanpulto.github.io/test/float+box-sizing1_wrong.html" style="height:420px;width:420px;border:0;margin:0 auto;display:block"></iframe>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;但是呢，当调节高度时，错位就发生了，如下图，而且chrom和firefox下错位的具体规律也不一样，问题肯定是和计算高度的33.33%和66.66%有关了，本菜鸟各种临时抱佛脚也找不出解决的办法。</p>
-<img src="image/flex1.png">
+<img src="image/flex1.png" style="margin:0 auto;"/>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;最终在小黄鸭的帮助下，算是解决了上述问题，办法就是放过浏览器也放过自己吧，不要搞那么多位小数啦，统一保留两位小数，用67%和33%。具体代码如下，演示链接：<a href="http://jiayuanpulto.github.io/test/float+box-sizing1.html" target="_blank">border九宫格</a>。</p>
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;

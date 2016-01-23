@@ -31,7 +31,7 @@
 <h2>色盘</h2>
 <div class="article_date"><p>2016-01-15</p></div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;偶然想做个页面的色彩效果，看了下色彩模式之类的，自己做个色盘好了，感觉挺炫酷的。</p>
-<img src="image/color3.png">
+<img src="image/color3.png"/>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;RGB颜色立方体比较直观，三个维度分别是红绿蓝，坐标值从0到255，黑色的坐标为(0,0,0),白色的坐标为(255,255,255)。将这个立方体以两种不同的方式投射为圆柱体，就是HSL和HSV色彩空间了。HSL和HSV色彩空间的轴心都是与颜色立方体的(0,0,0)与(255,255,255)两个点的连线相对应的，不同的是，HSL是以与上述连线垂直的平面不断切割立方体，再把每一个切割的点或面（除去(0,0,0)与(255,255,255)两个点外，切割的面都是正三角形）投影到一个圆上，再把所有的圆拼接在一起，而HSV是将以(0,0,0)(1,1,1)...(244,244,244)(255,255,255)等一系列的点作为顶点的三个互相垂直的面投影到圆上再拼接（相当于一层一层的剥开正方体，一次剥去三个面）。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;最终html5的canvas画出来的效果如下：</p>
 <iframe src="http://jiayuanpulto.github.io/test/color.html" style="height:550px;width:600px;border:0;margin:0 auto;display:block"></iframe>
