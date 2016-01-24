@@ -93,7 +93,7 @@
 </pre>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;接下来是用比较新的flex盒模型实现啦，快速的出来一个，见下图。</p>
 <iframe src="http://jiayuanpulto.github.io/test/flex.html" style="height:420px;width:420px;border:0;margin:0 auto;display:block"></iframe>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;纳尼，为什么不对称，原来是用flex:1时box-sizing属性不生效了，谷歌之发现貌似是这两个属性确实不兼容，各种谷歌，最终的解决办法是用width和height来代替flex，具体代码如下，演示链接：<a href="http://jiayuanpulto.github.io/test/flex-basis+box-sizing.html" target="_blank">flex-basis九宫格</a>。目前我感觉的原因是要使box-sizing属性生效，必须定义元素的宽高。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;纳尼，为什么不对称，原来是用flex:1时box-sizing属性不生效了，谷歌之发现貌似是这两个属性确实不兼容，各种谷歌，最终的解决办法是用width和height来代替flex，具体代码如下，演示链接：<a href="http://jiayuanpulto.github.io/test/flex-basis+box-sizing.html" target="_blank">flex+height+width九宫格</a>。目前我感觉的原因是要使box-sizing属性生效，必须定义元素的宽高。</p>
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
