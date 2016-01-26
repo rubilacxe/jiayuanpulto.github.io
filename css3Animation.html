@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="CSS3's animation"/>
+<title>CSS3之animation</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main_left">
+            <a href="/"><img class="avatar" src="image/mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
+<!-- content -->
+<h2>CSS3之animation</h2>
+<div class="article_date"><p>2016-01-26</p></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;学习CSS布局，练习个简单的动画好了。</p>
+<iframe src="http://jiayuanpulto.github.io/test/css3-animation.html" style="height:760px;width:500px;border:0;margin:0 auto;display:block"></iframe>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;CSS3&lt;/title&gt;
+&lt;style type="text/css"&gt;
+.main {width:760px; height:500px; background-color:black; top:0; left:0; position:absolute;}
+.part {top:0; left:0; width:0; height:0; position:absolute; transform-origin:0 0;}
+.part1 {border:71px solid YellowGreen; border-left-color:transparent; border-bottom-color: transparent; border-right-color:transparent; animation-name:animation1; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate; animation-timing-function:ease-in-out;}
+@keyframes animation1 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(300px, 100px);}
+    30% {transform: translate(300px, 100px);}
+    80% {transform: translate(380px, 210px) rotate(90deg);}
+    100% {transform: translate(380px, 210px) rotate(90deg);}
+}
+.part2 {border:71px solid SeaGreen; border-top-color:transparent; border-bottom-color: transparent; border-right-color:transparent; animation-name: animation2; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate;  animation-timing-function:ease-in-out;}
+@keyframes animation2 {
+    0% {transform: translate(0, 0) ;}
+    10% {transform: translate(300px, 100px);}
+    30% {transform: translate(300px, 100px);}
+    80% {transform: translate(380px, 320px);}
+    100% {transform: translate(380px, 320px);}
+}
+.part3 {border:35px solid red; border-left-color:transparent; border-top-color: transparent; border-right-color:transparent; animation-name: animation3; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate;  animation-timing-function:ease-in-out;}
+@keyframes animation3 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(300px, 170.7px);}
+    30% {transform: translate(300px, 170.7px);}
+    80% {transform: translate(235px, 118px) rotate(-15deg);}
+    100% {transform: translate(235px, 118px) rotate(-15deg);}
+}
+.part4 {width:50px; height:50px; background-color:yellow; animation-name: animation4; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate; animation-timing-function:ease-in-out;}
+@keyframes animation4 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(335px, 205.7px) rotate(-45deg);}
+    30% {transform: translate(335px, 205.7px) rotate(-45deg);}
+    80% {transform: translate(322px, 168px) rotate(-10deg);}
+    100% {transform: translate(322px, 168px) rotate(-10deg);}
+}
+.part5 {border:36px solid LightSalmon; border-top-color:transparent; border-bottom-color: transparent; border-left-color:transparent; animation-name:animation5; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate; animation-timing-function:ease-in-out;}
+@keyframes animation5 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(335px, 135px);}
+    30% {transform: translate(335px, 135px);}
+    80% {transform: translate(397px, 60px) rotate(60deg);}
+    100% {transform: translate(397px, 60px) rotate(60deg);}
+}
+.part6 {width:70.7px; height:35px; background-color:MediumOrchid; animation-name:animation6; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate; animation-timing-function:ease-in-out;}
+@keyframes animation6 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(441px, 100px) rotate(90deg) skew(45deg);}
+    30% {transform: translate(441px, 100px) rotate(90deg) skew(45deg);}
+    80% {transform: translate(356px, 62px) rotate(90deg) skew(45deg);}
+    100% {transform: translate(356px, 62px) rotate(90deg) skew(45deg);}
+}
+.part7 {border-top:70.7px solid MediumVioletRed; border-right:70.7px solid transparent; animation-name: animation7; animation-duration:2s; animation-iteration-count:infinite; animation-direction:alternate; animation-timing-function:ease-in-out;}
+@keyframes animation7 {
+    0% {transform: translate(0, 0);}
+    10% {transform: translate(441px, 241px) rotate(180deg);}
+    30% {transform: translate(441px, 241px) rotate(180deg);}
+    80% {transform: translate(441px, 243px) rotate(210deg);}
+    100% {transform: translate(441px, 243px) rotate(210deg);}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="main"&gt;
+        &lt;div class="part part1"&gt;&lt;/div&gt;
+        &lt;div class="part part2"&gt;&lt;/div&gt;
+        &lt;div class="part part3"&gt;&lt;/div&gt;
+        &lt;div class="part part4"&gt;&lt;/div&gt;
+        &lt;div class="part part5"&gt;&lt;/div&gt;
+        &lt;div class="part part6"&gt;&lt;/div&gt;
+        &lt;div class="part part7"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h3>参考</h3>
+<ul>
+<li><a href="http://blogread.cn/it/article/7317?f=wb" target="_blank">纯CSS3打造七巧板</a></li>
+<li><a href="http://kayosite.com/css3-animation.html" target="_blank">CSS3自定义动画</a></li>
+</ul>
+<!-- content end -->
+</div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</body>
+</html>

@@ -9,7 +9,7 @@
 .atn{color:#CC3300}
 .atv{color:#008800}
 .dec{color:#EEEEEE}
-pre.prettyprint{padding:15px;border:1px solid #888;background:#000000;}
+pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
 @media print{
     .str{color:#008800}
     .kwd{color:#EEEE00}
