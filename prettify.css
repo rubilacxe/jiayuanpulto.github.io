@@ -22,10 +22,10 @@ pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
     .atn{color:#CC3300}
     .atv{color:#008800}
 }*/
-/* Tomorrow Night Blue Theme */
+/* Tomorrow Night Eighties Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
-  background: #002451;
+  background: #2d2d2d;
   font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -34,64 +34,64 @@ pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
 }
 
 .pln {
-  color: white;
+  color: #cccccc;
 }
 
 @media screen {
   .str {
-    color: #d1f1a9;
+    color: #99cc99;
   }
 
   .kwd {
-    color: #ebbbff;
+    color: #cc99cc;
   }
 
   .com {
-    color: #7285b7;
+    color: #999999;
   }
 
   .typ {
-    color: #bbdaff;
+    color: #6699cc;
   }
 
   .lit {
-    color: #ffc58f;
+    color: #f99157;
   }
 
   .pun {
-    color: white;
+    color: #cccccc;
   }
 
   .opn {
-    color: white;
+    color: #cccccc;
   }
 
   .clo {
-    color: white;
+    color: #cccccc;
   }
 
   .tag {
-    color: #ff9da4;
+    color: #f2777a;
   }
 
   .atn {
-    color: #ffc58f;
+    color: #f99157;
   }
 
   .atv {
-    color: #99ffff;
+    color: #66cccc;
   }
 
   .dec {
-    color: #ffc58f;
+    color: #f99157;
   }
 
   .var {
-    color: #ff9da4;
+    color: #f2777a;
   }
 
   .fun {
-    color: #bbdaff;
+    color: #6699cc;
   }
 }
 @media print, projection {
