@@ -22,10 +22,10 @@ pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
     .atn{color:#CC3300}
     .atv{color:#008800}
 }*/
-/* Tomorrow Night Bright Theme */
+/* Tomorrow Night Blue Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
-  background: black;
+  background: #002451;
   font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -34,64 +34,64 @@ pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
 }
 
 .pln {
-  color: #eaeaea;
+  color: white;
 }
 
 @media screen {
   .str {
-    color: #b9ca4a;
+    color: #d1f1a9;
   }
 
   .kwd {
-    color: #c397d8;
+    color: #ebbbff;
   }
 
   .com {
-    color: #969896;
+    color: #7285b7;
   }
 
   .typ {
-    color: #7aa6da;
+    color: #bbdaff;
   }
 
   .lit {
-    color: #e78c45;
+    color: #ffc58f;
   }
 
   .pun {
-    color: #eaeaea;
+    color: white;
   }
 
   .opn {
-    color: #eaeaea;
+    color: white;
   }
 
   .clo {
-    color: #eaeaea;
+    color: white;
   }
 
   .tag {
-    color: #d54e53;
+    color: #ff9da4;
   }
 
   .atn {
-    color: #e78c45;
+    color: #ffc58f;
   }
 
   .atv {
-    color: #70c0b1;
+    color: #99ffff;
   }
 
   .dec {
-    color: #e78c45;
+    color: #ffc58f;
   }
 
   .var {
-    color: #d54e53;
+    color: #ff9da4;
   }
 
   .fun {
-    color: #7aa6da;
+    color: #bbdaff;
   }
 }
 @media print, projection {
