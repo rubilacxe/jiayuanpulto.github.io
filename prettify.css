@@ -22,144 +22,73 @@ pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
     .atn{color:#CC3300}
     .atv{color:#008800}
 }*/
-/* Vibrant Ink Theme */
-/* Original theme - http://alternateidea.com/blog/articles/2006/1/3/textmate-vibrant-ink-theme-and-prototype-bundle */
-.prettyprint {
-  background: black;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
-  font-size: 12px;
-  line-height: 1.5;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
+/* Pretty printing styles. Used with prettify.js.
+ *
+ * This version is slight modified based on the original version.
+ *
+ * Name:	Stanley Ng
+ * Email: 	stanleyhlng@googlegroups.com
+ * 
+ * Reference:
+ * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
+ */
 .pln {
-  color: white;
-}
+  color: #bd3613; }
 
-@media screen {
-  .str {
-    color: #66ff00;
-  }
+.str {
+  color: #269186; }
 
-  .kwd {
-    color: #ff6600;
-  }
+.kwd {
+  color: #859900; }
 
-  .com {
-    color: #9933cc;
-  }
+.com {
+  color: #586175;
+  font-style: italic; }
 
-  .typ {
-    color: #445588;
-  }
+.typ {
+  color: #b58900; }
 
-  .lit {
-    color: #445588;
-  }
+.lit {
+  color: #2aa198; }
 
-  .pun {
-    color: white;
-  }
+.pun {
+  color: #839496; }
 
-  .opn {
-    color: white;
-  }
+.opn {
+  color: #839496; }
 
-  .clo {
-    color: white;
-  }
+.clo {
+  color: #839496; }
 
-  .tag {
-    color: white;
-  }
+.tag {
+  color: #268bd2; }
 
-  .atn {
-    color: #99cc99;
-  }
+.atn {
+  color: #586175; }
 
-  .atv {
-    color: #66ff00;
-  }
+.atv {
+  color: #2aa198; }
 
-  .dec {
-    color: white;
-  }
+.dec {
+  color: #268bd2; }
 
-  .var {
-    color: white;
-  }
+.var {
+  color: #268bd2; }
 
-  .fun {
-    color: #ffcc00;
-  }
-}
-@media print, projection {
-  .str {
-    color: #006600;
-  }
+.fun {
+  color: #FF0000; }
 
-  .kwd {
-    color: #006;
-    font-weight: bold;
-  }
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint {
+  background-color: #042029;
+  padding: 10px;
+  border: 1px solid #E1E1E8; }
 
-  .com {
-    color: #600;
-    font-style: italic;
-  }
-
-  .typ {
-    color: #404;
-    font-weight: bold;
-  }
-
-  .lit {
-    color: #004444;
-  }
-
-  .pun, .opn, .clo {
-    color: #444400;
-  }
-
-  .tag {
-    color: #006;
-    font-weight: bold;
-  }
-
-  .atn {
-    color: #440044;
-  }
-
-  .atv {
-    color: #006600;
-  }
-}
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+  color: #4c666c;
+  margin: 0 0 0 40px; }
 
-/* IE indents via margin-left */
-li.L0,
-li.L1,
-li.L2,
-li.L3,
-li.L4,
-li.L5,
-li.L6,
-li.L7,
-li.L8,
-li.L9 {
-  /* */
-}
-
-/* Alternate shading for lines */
-li.L1,
-li.L3,
-li.L5,
-li.L7,
-li.L9 {
-  /* */
-}
+ol.linenums li {
+  line-height: 18px;
+  padding-left: 12px; }
