@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Object Function __proto__ prototype constructor"/>
+<title>js之Object与Function的三种属性(__proto__、prototype和constructor)之间的关系</title>
+<link type="text/css" href="style.css" rel="stylesheet" />
+<link type="text/css" href="prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="prettify.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main_left">
+            <a href="/"><img class="avatar" src="image/mypic.png"></a>
+            <h1>jiayuan</h1>
+            <p>菜鸟程序媛</p>
+            <p>爱户外<br/>爱画画<br/>爱种花</p>
+            <div class="social">
+                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
+                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
+                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="catalog">
+                <div class="article" id="article">
+<div class="entry">
+<!-- content -->
+<h2>js之Object与Function的三种属性(__proto__、prototype和constructor)之间的关系</h2>
+<div class="article_date"><p>2016-04-01</p></div>
+<img src="image/proto.jpg" alt="" title=""/>
+<pre class="prettyprint">
+// true true true true true true true true true true true true
+console.log(
+    //Object && Function
+    Object.constructor === Function,
+    Object.__proto__.constructor === Function,
+    //Object && A
+    Object.__proto__ === Object.constructor.__proto__,
+    Object.__proto__ === Object.constructor.prototype,
+    //Object && B
+    Object.prototype === Object.__proto__.__proto__,
+    Object.prototype.constructor === Object,
+    //Object && null
+    Object.prototype.__proto__ === null,
+    //Function && A
+    Function.prototype === Object.__proto__,
+    Function.__proto__ === Object.__proto__,
+    Object.__proto__.constructor === Function,
+    //A && B
+    Object.__proto__.__proto__ === Object.prototype,
+    //long way
+    Object.constructor.prototype.__proto__.constructor === Object
+);
+</pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Object.__proto__ === Object.constructor.prototype, Function.__proto__ === Function.constructor.prototype，理解__proto__属性为构造函数的原型的引用。</p>
+
+<h3>参考</h3>
+<ul>
+<li><a href="https://segmentfault.com/q/1010000000249140" target="_blank">Function为何是Object的实例呢</a></li>
+<li><a href="http://stackoverflow.com/questions/650764/how-does-proto-differ-from-constructor-prototype" target="_blank">How does __proto__ differ from constructor.prototype?</a></li>
+</ul>
+<!-- content end -->
+</div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</body>
+</html>
