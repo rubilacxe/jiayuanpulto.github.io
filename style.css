@@ -55,6 +55,7 @@ body {
 .article a {
     color: rgb(207,88,117);
     font-size: 17px;
+    line-height: 30px;
 }
 
 .article font {
