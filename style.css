@@ -85,7 +85,7 @@ body {
     word-wrap: break-word;
     margin: 0 auto;
     overflow: auto;
-    font-family: consolas;
+    /*font-family: consolas;*/
 }
 .pages {
     margin: 15px 15px 15px;
