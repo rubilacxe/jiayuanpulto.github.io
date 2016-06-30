@@ -11,19 +11,19 @@ body {
     position: relative;
 }
 .main_left {
-    height: 100%; 
-    width: 300px; 
+    height: 100%;
+    width: 300px;
     background: rgb(173,195,192);
-    float: left; 
-    margin-left: 100px; 
+    float: left;
+    margin-left: 50px;
     position: fixed;
 }
 .main_left h1, .main_left p {
     color: rgb(243,244,246);
     text-align: center;
 }
-.main_left h1 { 
-    font-size:30px; 
+.main_left h1 {
+    font-size:30px;
     margin: 1.2em 0;
 }
 .main_left p {
@@ -31,11 +31,10 @@ body {
     line-height: 35px;
 }
 .main_right {
-    left: 400px;
-    min-height: 100%; 
+    left: 350px;
+    min-height: 100%;
     width: auto;
-    left: 400px;
-    right: 0; 
+    right: 0;
     position: absolute;
 }
 .catalog {
@@ -104,8 +103,8 @@ body {
     margin:60px 60px;
 }
 .social img {
-    height:30px; 
-    width:30px; 
+    height:30px;
+    width:30px;
     margin-left:20px;
 }
 .avatar {
