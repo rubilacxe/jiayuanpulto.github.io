@@ -27,6 +27,8 @@
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
+<h2>mac终端配置自动登录服务器</h2>
+<div class="article_date"><p>2016-06-29</p></div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;还没买SecureCrt，所以只能折腾下终端先用着，最终配置的自动登录还是不太令人满意，配置如下：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;首先安装brew，再配置ProxyCommand：brew install proxychains-ng。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;接下来配置证书登录，本机“ssh-keygen -t rsa -f my-key-file” & “cp my-key-file ~/.ssh/”，远程主机“cat my-key-file.pub >> ~/.ssh/authorized_keys”，其中my-key-file为秘钥文件，my-key-file.pub为公钥文件，操作完成之后即完成了认证，可以通过证书登录远程主机了。</p>
