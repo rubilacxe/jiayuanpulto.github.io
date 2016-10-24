@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
+            <a href="/"><img class="avatarmain" src="image/mypic.png"></a>
             <h1>jiayuan</h1>
             <p>菜鸟程序媛</p>
             <p>爱户外<br/>爱画画<br/>爱种花</p>
@@ -25,7 +25,7 @@
                 </div>
                 <div id="pages">
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -56,7 +56,7 @@
                     }
                     if (tmp.length > 0)
                         arr.push(tmp);
-                    var url = window.location.href; 
+                    var url = window.location.href;
                     var page = /page=([0-9]+)$/i.exec(window.location.href);
                     if (page)
                         page = page[1];
@@ -75,17 +75,17 @@
                         var pagenum = [];
                         if (num <= 10) {
                             for (var i = 1; i <= num; i++) {
-                                pagenum.push(i); 
+                                pagenum.push(i);
                             }
                         }
                         else {
                             if (page <= 4 || page > (num-4)) {
                                 for (var i = 1; i <= 5; i++) {
-                                    pagenum.push(i); 
+                                    pagenum.push(i);
                                 }
                                 pagenum.push("point");
                                 for (var i = (num-4); i <= num; i++) {
-                                    pagenum.push(i); 
+                                    pagenum.push(i);
                                 }
                             }
                             else {
@@ -107,11 +107,11 @@
                                 if (page == pagenum[i])
                                     pages += '<li><span class="selected">'+ page +'</span></li>';
                                 else
-                                    pages += '<li><a href="http://jiayuanpulto.github.io?page='+ pagenum[i] +'">'+ pagenum[i] +'</a></li>'; 
+                                    pages += '<li><a href="http://jiayuanpulto.github.io?page='+ pagenum[i] +'">'+ pagenum[i] +'</a></li>';
                             }
                         }
                         pages += "</ul>";
-                        $("#pages").html(pages);  
+                        $("#pages").html(pages);
                     }
                 },
                 error: function(e) {

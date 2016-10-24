@@ -1,24 +1,21 @@
-.str{color:#008800}
-.kwd{color:#EEEE00}
-.com{color:#AAAAAA}
-.typ{color:#AAAAAA}
-.lit{color:#EEEEEE}
-.pun{color:#CC3300}
-.pln{color:#EEEEEE}
-.tag{color:#CC3300}
-.atn{color:#CC3300}
-.atv{color:#008800}
-.dec{color:#EEEEEE}
-pre.prettyprint{padding:15px;border:1px solid #888;background:#002b36;}
-@media print{
-    .str{color:#008800}
-    .kwd{color:#EEEE00}
-    .com{color:#AAAAAA}
-    .typ{color:#AAAAAA}
-    .lit{color:#EEEEEE}
-    .pun{color:#CC3300}
-    .pln{color:#EEEEEE}
-    .tag{color:#CC3300}
-    .atn{color:#CC3300}
-    .atv{color:#008800}
+
+@media screen {
+.str { color: #080 } /* string content */
+.kwd { color: #008 } /* a keyword */
+.com { color: #800 } /* a comment */
+.typ { color: #606 } /* a type name */
+.lit { color: #066 } /* a literal value */
+/* punctuation, lisp open bracket, lisp close bracket */
+.pun, .opn, .clo { color: #660 }
+.tag { color: #008 } /* a markup tag name */
+.atn { color: #606 } /* a markup attribute name */
+.atv { color: #080 } /* a markup attribute value */
+.dec, .var { color: #606 } /* a declaration; a variable name */
+.fun { color: red } /* a function name */
 }
+pre.prettyprint {
+    background-color: #E0E0E0;
+    padding: 2px; border-color: #E0E0E0;
+border-radius: 1em;
+border-style: solid;
+border-width: 0.3em; }
