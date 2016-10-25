@@ -11,24 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
-            <h1>jiayuan</h1>
-            <p>菜鸟程序媛</p>
-            <p>爱户外<br/>爱画画<br/>爱种花</p>
-            <div class="social">
-                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="catalog">
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
-<h2>图片上传</h2>
-<div class="article_date"><p>2015-11-23</p></div>
+<div class="top">
+<a href="/"><img class="avatar" src="image/mypic.png"></a>
+<div class="title">图片上传</div>
+</div>
+<div class="line">日期：201511月23日</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;之前接触到的图片上传使用的是html的form提交方法，是时候了解下其他的上传方法了。网上看了看，现在主要是三种方法上传图片，一种是html+form，一种是html5的formdata，另外一种是flash。对于flash的方法最不熟悉了，看了下uploadify.com的demo，chrom正常，firefox由于flash插件安装不正确显示异常。下面的例子只有前两种方法。</p>
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
@@ -40,10 +30,10 @@
 $(function () { //$("document").ready(function () { //确保元素可选择
     $("#file_one input").on("change", function () {
         //$("#file_one form").submit(); //提交表单，跳转upload.php页面
-        iframeDate($("#file_one")); //iframe模拟异步上传   
+        iframeDate($("#file_one")); //iframe模拟异步上传
     });
     $("#file_two input").on("change", function () {
-        postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交 
+        postData($("#file_two input"), $("#file_two img")); //html5 fromdata提交
     });
 });
 function iframeDate (divObj) {
@@ -54,19 +44,19 @@ function iframeDate (divObj) {
     $('iframe[name=uploadIframe]').load(function () { //等待iframe加载完毕
         var url = $("iframe[name=uploadIframe]").contents()[0].body.innerHTML.replace(/\\/g,'').replace(/"/g,'');
         divObj.find("img").attr("src", url).show();
-    }); 
+    });
 }
 function postData (inputObj, imgObj) {
     var data = new FormData();
     data.append("file", inputObj[0].files[0]);
-    $.ajax({  
-        url: 'upload.php',  
-        type: 'POST',  
-        data: data,  
-        dataType: 'JSON',  
-        cache: false,  
-        processData: false,  
-        contentType: false, 
+    $.ajax({
+        url: 'upload.php',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
         success:function (url) {
             imgObj.attr("src", url);
             imgObj.attr("style", "display");
@@ -99,8 +89,6 @@ img { height:200px; length:200px;}
 </pre>
 <!-- content end -->
 </div>
-                </div>
-            </div>   
         </div>
     </div>
 </body>

@@ -11,24 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
-            <h1>jiayuan</h1>
-            <p>菜鸟程序媛</p>
-            <p>爱户外<br/>爱画画<br/>爱种花</p>
-            <div class="social">
-                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="catalog">
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
-<h2>FastCgi与PHP-fpm</h2>
-<div class="article_date"><p>2015-11-11</p></div>
+<div class="top">
+<a href="/"><img class="avatar" src="image/mypic.png"></a>
+<div class="title">FastCgi与PHP</div>
+</div>
+<div class="line">日期：2015年11月11日</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;之前项目的敏感信息（数据库配置、环境变量等）是通过nginx的fastcgi_param来配置的，而没有使用php-fpm来配置，原因是方便运维（发布代码到平台，由平台来运维服务器）。虽然上述两种方法都可以通过$_SERVER['DATABASE_HOST']来获取数据，但是当配置信息通过nginx的fastcgi_param来设置的话，当nginx和php交互时，会带来大量的数据传输，所以用php-fpm相对更好些。</p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;既然用到了，就来了解下CGI、FASTCGI、PHP-CGI及PHP-FPM的关系好了。</p>
@@ -54,8 +44,6 @@
 </ul>
 <!-- content end -->
 </div>
-                </div>
-            </div>   
         </div>
     </div>
 </body>

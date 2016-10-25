@@ -11,24 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
-            <h1>jiayuan</h1>
-            <p>菜鸟程序媛</p>
-            <p>爱户外<br/>爱画画<br/>爱种花</p>
-            <div class="social">
-                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="catalog">
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
-<h2>php多进程与进程间通信</h2>
-<div class="article_date"><p>2015-11-09</p></div>
+<div class="top">
+<a href="/"><img class="avatar" src="image/mypic.png"></a>
+<div class="title">php多进程与进程间通信</div>
+</div>
+<div class="line">日期：2015年11月9日</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;之前用php分析日志，单个进程太慢，就准备开多个进程试试。每天需要处理大概100个文件，每个文件一百万行左右，开启三个进程（进程数视服务器情况定）需要的时间约为之前的1/3。</p>
 
 <h3 id="ipc">IPC简介</h3>
@@ -91,7 +81,7 @@ for ($i = 1; $i &lt;= 1000; $i++) {
     run();
     echo "Idle process number: " . $p_number . "\n";
 }
-?&gt;  
+?&gt;
 </pre>
 
 <p>实例2(proc_open()实例)</p>
@@ -177,13 +167,13 @@ $message_queue = msg_get_queue($message_queue_key, 0666);
 $pid = pcntl_fork();
 if ($pid==-1) {
     die("cannot fork");
-} 
+}
 else if ($pid) {
     pcntl_wait($status);
     //读取消息队列中的内容
     msg_receive($message_queue, 0, $message_type, 1024, $message, true, MSG_IPC_NOWAIT);
     echo $message;
-} 
+}
 else {
     $pid = posix_getpid();
     //向消息队列中写
@@ -295,8 +285,6 @@ socket_listen($socket);
 </ul>
 <!-- content end -->
 </div>
-                </div>
-            </div>   
         </div>
     </div>
 </body>

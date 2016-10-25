@@ -11,24 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
-            <h1>jiayuan</h1>
-            <p>菜鸟程序媛</p>
-            <p>爱户外<br/>爱画画<br/>爱种花</p>
-            <div class="social">
-                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="catalog">
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
-<h2>mac终端配置自动登录服务器</h2>
-<div class="article_date"><p>2016-06-29</p></div>
+<div class="top">
+<a href="/"><img class="avatar" src="image/mypic.png"></a>
+<div class="title">mac终端配置自动登录服务器</div>
+</div>
+<div class="line">日期：2016年6月29日</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;还没买SecureCrt，所以只能折腾下终端先用着，最终配置的自动登录还是不太令人满意，配置如下：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;首先安装brew，再配置ProxyCommand：brew install proxychains-ng。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;接下来配置证书登录，本机“ssh-keygen -t rsa -f my-key-file” & “cp my-key-file ~/.ssh/”，远程主机“cat my-key-file.pub >> ~/.ssh/authorized_keys”，其中my-key-file为秘钥文件，my-key-file.pub为公钥文件，操作完成之后即完成了认证，可以通过证书登录远程主机了。</p>
@@ -58,8 +48,6 @@ Host test1
 <p>&nbsp;&nbsp;&nbsp;&nbsp;但是重启mac之后，~/.ssh/下的socket文件会被删除，所以又需要重新输入密码了。对于我这样每天关机的人，每天都需要重输密码，太痛苦了。但是完全的Session Copy又没找到好的方法来实现。所以还是得咬牙买SecureCrt了，还有sz/rz等功能，会方便很多。</p>
 <!-- content end -->
 </div>
-                </div>
-            </div>
         </div>
     </div>
 </body>

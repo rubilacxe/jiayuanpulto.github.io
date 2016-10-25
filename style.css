@@ -15,9 +15,9 @@ html, body {
     height: 100%;
     width: 300px;
     background: rgb(173,195,192);
-    float: left;
-    margin-left: 50px;
     position: fixed;
+    left:0;
+    bottom: 0;
 }
 .main_left h1, .main_left p {
     color: rgb(243,244,246);
@@ -116,6 +116,10 @@ html, body {
     margin-top: -20px;
 }
 .avatarmain {
+    width:128px;
+    height:128px;
+    margin-top:100px;
+    margin-left:86px;
 }
 .selected {
     color: rgb(207,88,117);
@@ -142,4 +146,5 @@ a {
     border-top: 2px solid #e0e0e0;
     padding-top: 1em;
     padding-bottom: 1em;
+    color: rgb(173,195,192);
 }

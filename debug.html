@@ -11,24 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="main_left">
-            <a href="/"><img class="avatar" src="image/mypic.png"></a>
-            <h1>jiayuan</h1>
-            <p>菜鸟程序媛</p>
-            <p>爱户外<br/>爱画画<br/>爱种花</p>
-            <div class="social">
-                <a href="https://github.com/jiayuanpulto" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://www.weibo.com/u/1851047327" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:xujiayuan0813@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="catalog">
                 <div class="article" id="article">
 <div class="entry">
 <!-- content -->
-<h2>php7与debug</h2>
-<div class="article_date"><p>2016-01-04</p></div>
+<div class="top">
+<a href="/"><img class="avatar" src="image/mypic.png"></a>
+<div class="title">php7与debug</div>
+</div>
+<div class="line">日期：2016年1月4日</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;看到篇文章讲用gdb找出php程序出问题时正在执行的代码行(也可以分析core dump文件)，自己也来试试。  </p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;用yum安装的php5.4运行程序，gdb卡在“missing debuginfo-install libedit&amp;&amp;libidn”，使用“debuginfo-install”各种找不到安装包，谷歌了也没辙。。。  </p>
@@ -39,8 +29,8 @@
 (gdb) source /root/php-7.0.1/.gdbinit
 (gdb) zbacktrace
 [0xb72140a0] sleep(1) [internal function]
-[0xb7214060] test1() /root/test.php:5 
-[0xb7214020] (main) /root/test.php:8   
+[0xb7214060] test1() /root/test.php:5
+[0xb7214020] (main) /root/test.php:8
 </pre  class="prettyprint">
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;php7运行程序，使用gdb分析，“(gdb) print (char *) executor_globals.active_op_array-&gt;filename”一直报错，“There is no member named active_op_array.”，谷歌之也没找到问题。</p>
@@ -53,8 +43,6 @@
 </ul>
 <!-- content end -->
 </div>
-                </div>
-            </div>   
         </div>
     </div>
 </body>
