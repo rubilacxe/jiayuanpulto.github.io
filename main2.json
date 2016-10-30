@@ -1,7 +1,6 @@
 
 {"name":"jiayuan","perpage":20,"posts":
-[
-{"title":"mac下常用app","date":"2016-06-27","tags":"","path":"mac.html"},
+[{"title":"mac下常用app","date":"2016-06-27","tags":"","path":"mac.html"},
 {"title":"js之__proto__、prototype和constructor的关系","date":"2016-04-01","tags":"","path":"proto.html"},
 {"title":"CSS3之animation","date":"2016-01-26","tags":"","path":"css3Animation.html"},
 {"title":"CSS3之flex布局","date":"2016-01-23","tags":"","path":"flex.html"},
@@ -13,5 +12,4 @@
 {"title":"nginx+php+smarty","date":"2015-11-09","tags":"nginx php smarty bandwagonhost","path":"nginxps.html"},
 {"title":"jekyll试用","date":"2015-11-09","tags":"jekyll bandwagonhost","path":"jekyll.html"},
 {"title":"session与cookie","date":"2015-11-05","tags":"session cookie","path":"session.html"}
-
 ]}
