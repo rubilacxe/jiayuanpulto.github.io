@@ -51,13 +51,11 @@ html, body {
     margin-left:50px;
 }
 .article a {
-    color: rgb(207,88,117);
     font-size: 17px;
     line-height: 30px;
 }
 
 .article font {
-    color: rgb(173,195,192);
     float: left;
     font-size: 17px;
     font-weight: 700;
@@ -134,14 +132,19 @@ a {
     text-decoration: none;
 }
 .title {
+    color: rgb(207,88,117);
     font-size: 20px;
     text-align: center;
     margin-top: 30px;
 }
 .s_title {
+    color: rgb(173,195,192);
     font-size: 20px;
     text-align: center;
     margin-top: 30px;
+}
+.date {
+    color: rgb(173,195,192);
 }
 .top {
     height:40px;
