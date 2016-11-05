@@ -79,10 +79,6 @@ html, body {
     list-style-type: disc;
     margin: auto;
 }
-.entry img {
-    width: 85%;
-    margin: 0 auto;
-}
 .prettyprint {
     word-wrap: break-word;
     margin: 0 auto;
@@ -173,6 +169,10 @@ a {
     font-style: italic;
     font-size: 14px;
     color: rgb(20,20,20);
+}
+.fig {
+    width: 85%;
+    margin: 0 auto;
 }
 .temp {
     border-bottom: 2px solid rgb(0,0,0);
