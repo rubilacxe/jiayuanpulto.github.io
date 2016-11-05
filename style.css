@@ -55,13 +55,6 @@ html, body {
     line-height: 30px;
 }
 
-.article font {
-    float: left;
-    font-size: 17px;
-    font-weight: 700;
-    width: 140px;
-    line-height: 30px;
-}
 .entry {
    margin: 10px 20px;
 }
@@ -170,16 +163,7 @@ html, body {
     width: 85%;
     margin: 0 auto;
 }
-.temp {
-    border-bottom: 2px solid rgb(0,0,0);
-    font-size: 20px;
-    font-weight: 700;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    color: rgb(0,0,0);
-    font-style: italic;
-    font-style: oblique;
-}
+
 .green_enl{
     color: rgb(2,191,2);
 }
@@ -195,3 +179,21 @@ html, body {
       font-family: "consola";
       src: url('consola.ttf');
     }
+.temp {
+    border-bottom: 2px solid rgb(0,0,0);
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: rgb(0,0,0);
+    font-style: italic;
+    font-style: oblique;
+}
+.temp {
+    float: left;
+    font-size: 17px;
+    font-weight: 700;
+    width: 140px;
+    line-height: 30px;
+}
+
