@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    font-family: icomoon;
+    font-family: consolas;
     background-color: #f2f2f2;
 }
 .container {
@@ -126,7 +126,7 @@ html, body {
     color: rgb(173,195,192);
 }
 p, h1 {
-    font-family: icomoon;
+    font-family: consolas;
 }
 a {
     text-decoration: none;
@@ -150,8 +150,6 @@ a {
 }
 .intro {
     border-top: 2px solid #e0e0e0;
-    padding-top: 1em;
-    padding-bottom: 1em;
     color: rgb(173,195,192);
     font-style: italic;
 }
