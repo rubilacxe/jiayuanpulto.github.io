@@ -185,3 +185,7 @@ a {
     font-style: italic;
     font-style: oblique;
 }
+ @font-face {
+      font-family: Oswald-Regular;
+      src: /Oswald-Regular.tff;
+    }
