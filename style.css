@@ -180,6 +180,9 @@ html, body {
     font-style: italic;
     font-style: oblique;
 }
+.green_enl{
+    color: rgb(2,191,2);
+}
 @font-face {
       font-family: "Oswald-Regular";
       src: url('Oswald-Regular.ttf');
