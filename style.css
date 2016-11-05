@@ -187,5 +187,5 @@ a {
 }
  @font-face {
       font-family: Oswald-Regular;
-      src: /Oswald-Regular.tff;
+      src: url("Oswald-Regular.tff");
     }
