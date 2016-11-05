@@ -66,7 +66,7 @@
                         page = 1;
                     var article = "<ul>";
                     for (var i = 0; i < arr[page-1].length; i++) {
-                        article += '<li><font class="date">' + arr[page-1][i].date + '</font><a class="title" href="' + arr[page-1][i].path + '">' + arr[page-1][i].title +'</a></li>';
+                        article += '<li><font class="short_title">' + arr[page-1][i].date + '</font><a class="title" href="' + arr[page-1][i].path + '">' + arr[page-1][i].title +'</a></li>';
                     }
                     article += "</ul>";
                     $("#article").html(article);
