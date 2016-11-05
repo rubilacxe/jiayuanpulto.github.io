@@ -154,3 +154,11 @@ a {
     padding-bottom: 1em;
     color: rgb(173,195,192);
 }
+.section {
+    border-bottom: 2px solid #e0e0e0;
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: rgb(0,0,0);
+}
