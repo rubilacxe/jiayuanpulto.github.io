@@ -189,3 +189,7 @@ a {
       font-family: "Oswald-Regular";
       src: url('Oswald-Regular.ttf');
     }
+@font-face {
+      font-family: "icomoon";
+      src: url('icomoon.ttf');
+    }
