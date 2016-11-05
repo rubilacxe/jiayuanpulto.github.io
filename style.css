@@ -135,7 +135,7 @@ html, body {
     color: rgb(173,195,192);
 }
 .top {
-    height:60px;
+    /*height:60px;*/
     margin: 20px 40px;
 }
 .intro {
