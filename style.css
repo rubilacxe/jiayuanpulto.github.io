@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    font-family: Timesnewroman;
+    font-family: consolas;
     background-color: #f2f2f2;
 }
 .container {
@@ -126,7 +126,7 @@ html, body {
     color: rgb(173,195,192);
 }
 p, h1 {
-    font-family: Timesnewroman;
+    font-family: consolas;
 }
 a {
     text-decoration: none;
@@ -135,6 +135,7 @@ a {
     color: rgb(0,0,0);
     font-size: 20px;
     text-align: center;
+    font-family: Oswald-Regular;
 }
 .s_title {
     color: rgb(173,195,192);
