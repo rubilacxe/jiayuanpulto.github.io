@@ -5,13 +5,14 @@
     font-weight: bold;
 }
 .aca h1{
-    color: #6B2222;
+    color: rgb(173, 195, 192);
     text-align: left;
     font-weight: bold;
     padding: 0 0 10px;
+    font-size: 3em;
 }
 .aca h2{    
-    color: #6B2222;
+    color: rgb(173, 195, 192);
     text-align: left;
     font-weight: bold;
     padding: 0 0 10px;
