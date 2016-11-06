@@ -1,0 +1,18 @@
+.Pub_title {
+    font-style: italic;
+}
+.Pub_author{
+    font-weight: bold;
+}
+.aca h1{
+    color: #6B2222;
+    text-align: left;
+    font-weight: bold;
+    padding: 0 0 10px;
+}
+.aca h2{    
+    color: #6B2222;
+    text-align: left;
+    font-weight: bold;
+    padding: 0 0 10px;
+}
