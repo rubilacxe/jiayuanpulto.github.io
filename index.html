@@ -10,15 +10,6 @@
     <div class="container">
         <div class="main_left">
             <div id="left_test"></div>
-            <a href="/"><img class="avatarmain" src="image/mypic_temp.png"></a>
-            <h1>Rubilacxe</h1>
-            <p>SOMEBODY</p>
-            <p><a href="ingress.html" title="ingress">ingress</a><br/>something<br/>something</p>
-            <div class="social">
-                <a href="https://github.com/rubilacxe" target="_blank" title="github"><img src="image/github.png" /></a>
-                <a href="http://weibo.com/rubilacxe" target="_blank" title="weibo"><img src="image/weibo.png" /></a>
-                <a href="mailto:rubilacxelee@gmail.com" target="_blank" title="mail"><img src="image/mail.png" /></a>
-            </div>
         </div>
         <div class="main_right">
             <div class="catalog">
@@ -35,7 +26,7 @@
                 url: "left_main.html",
                 type: "GET",
                 success: function(data){
-                    $("#left_test").html("<a>123</a>");
+                    $("#left_test").html(data);
                 },
             
             });
