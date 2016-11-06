@@ -32,6 +32,7 @@ html, body {
     line-height: 35px;
 }
 .main_left_content {
+    color: rgb(243,244,246);
 }
 .main_right {
     left: 25%;
