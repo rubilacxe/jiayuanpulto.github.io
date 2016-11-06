@@ -10,7 +10,7 @@ html, body {
 }
 .main_left {
     height: 100%;
-    width: 300px;
+    /*width: 300px;*/
     background: rgb(173,195,192);
     position: fixed;
     left:0;
