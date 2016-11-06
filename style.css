@@ -46,20 +46,6 @@ html, body {
     margin-left: 5%;
     margin-right: 5%;
 }
-.article {
-    margin: 0 auto;
-    position: relative;
-}
-.article li {
-    list-style-type: none;
-    margin: 30px 0;
-    margin-left:50px;
-}
-.article a {
-    font-size: 17px;
-    line-height: 30px;
-}
-
 .entry {
    margin: 10px 20px;
 }
