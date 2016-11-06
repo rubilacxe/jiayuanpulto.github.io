@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <div class="main_left">
+            <div id="left_test"></div>
             <a href="/"><img class="avatarmain" src="image/mypic_temp.png"></a>
             <h1>Rubilacxe</h1>
             <p>SOMEBODY</p>
@@ -30,6 +31,17 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            $.ajax({
+                url: "left_main.html",
+                type: "GET",
+                success: function(data){
+                    $("#left_test").html("<a>123</a>");
+                },
+            
+            });
+            
+            
+            
             $.ajax({
                 url: "main.json",
                 type: "GET",
