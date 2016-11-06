@@ -33,7 +33,6 @@ html, body {
 }
 .main_right {
     left: 25%;
-    min-height: 100%;
     width: 75%;
     right: 0;
     position: absolute;
