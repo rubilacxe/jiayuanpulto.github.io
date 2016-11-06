@@ -13,7 +13,7 @@ html, body {
 }
 .main_left {
     height: 100%;
-    width: 300px;
+    width: 25%;
     background: rgb(173,195,192);
     position: fixed;
     left:0;
@@ -32,9 +32,9 @@ html, body {
     line-height: 35px;
 }
 .main_right {
-    left: 350px;
+    left: 25%;
     min-height: 100%;
-    width: auto;
+    width: 75%;
     right: 0;
     position: absolute;
 }
