@@ -94,13 +94,14 @@ html, body {
     padding: 3px 10px;
 }
 .social {
-    margin-left:30%;
-    width: 40%;
+    margin-left:10%;
+    width: 80%;
 }
 .social img {
     height:30px;
     width:30px;
-    margin-left:20px;
+    margin-left:10px;
+    margin-right:10px;
 }
 .avatar {
     float: left;
