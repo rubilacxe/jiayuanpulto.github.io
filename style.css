@@ -33,6 +33,7 @@ html, body {
 }
 .main_left a {
     color: rgb(243,244,246);
+    text-decoration: none;
 }
 .main_right {
     left: 25%;
