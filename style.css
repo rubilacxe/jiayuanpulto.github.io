@@ -31,6 +31,12 @@ html, body {
     font-size:15px;
     line-height: 35px;
 }
+.main_left_content {
+    height: 50%;
+    width: 100%;
+    bottom: 25%;
+    top: 25%;
+}
 .main_right {
     left: 25%;
     width: 75%;
