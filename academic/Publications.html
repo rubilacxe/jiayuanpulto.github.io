@@ -44,23 +44,3 @@ pubs:
     url: "http://iopscience.iop.org/article/10.1088/0953-8984/25/5/055601/meta"
     booktitle: " J. Phys.: Condens. Matter 25 (2013) 055601"
 
-
----
-
-# Publications
-
-{% for pub in page.pubs %}
-{% unless pub.hidden %}
-  - {% if pub.url %} [{{pub.title}}]({{pub.url}}).
-    {% else %} {{pub.title}}.
-    {% endif %}{% if pub.type %}({{pub.type}})
-    {% endif %}<br>
-    {{pub.author}},
-    {% if pub.type == 'Technical Report' %}{{pub.number}}
-    {% endif %}{{pub.booktitle}}{{pub.school}}{{pub.journal}}.<br>
-    {% if pub.address %}{{pub.address}}.
-    {% endif %}{% if pub.key %}[Bibtex](http://groups.csail.mit.edu/commit/bibtex.cgi?key={{pub.key}}).
-    {% endif %}{% if pub.bibtex %}[Bibtex]({{pub.bibtex}}).
-    {% endif %}
-{% endunless %}
-{% endfor %}
