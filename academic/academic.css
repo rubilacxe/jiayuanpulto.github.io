@@ -16,4 +16,8 @@
     text-align: left;
     font-weight: bold;
     padding: 0 0 10px;
+    font-size: 2em;
+}
+.aca p{
+    font-size: 1.5em;
 }
