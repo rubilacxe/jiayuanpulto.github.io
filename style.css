@@ -6,13 +6,11 @@ html, body {
 }
 .container {
     margin: 0 auto;
-    padding: 1em;
 }
 .main_left {
     height: 100%;
     /*width: 300px;*/
     background: rgb(173,195,192);
-    position: fixed;
     left:0;
     bottom: 0;
 }
