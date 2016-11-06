@@ -1,11 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>Rubilacxe's blog</title>
-<link type="text/css" href="style.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
+
+<head>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                url: "head.html",
+                type: "GET",
+                success: function(data){
+                    $("#page_left").html(data);
+                },
+            
+            });>
+    </script>
+</head>
+    
 <body>
     <div class="container">
         <div class="main_left">
@@ -25,14 +37,11 @@
             $.ajax({
                 url: "left_main.html",
                 type: "GET",
-                success: function(data1){
-                    $("#page_left").html(data1);
+                success: function(data){
+                    $("#page_left").html(data);
                 },
             
             });
-
-            
-            
             
             $.ajax({
                 url: "main.json",
