@@ -46,6 +46,21 @@ html, body {
     margin-left: 5%;
     margin-right: 5%;
 }
+.catalog a{
+  color: rgb(0,0,0);
+  font-size: 17px;
+  font-family: Oswald-Regular;
+  line-height: 30px;
+}
+.catalog_date{
+    color: rgb(173,195,192);
+    float: left;
+    font-size: 17px;
+    font-weight: 700;
+    width: 140px;
+    line-height: 30px;
+}
+}
 .entry {
    margin: 10px 20px;
 }
@@ -159,6 +174,7 @@ html, body {
 .green_enl{
     color: rgb(2,191,2);
 }
+
 @font-face {
       font-family: "Oswald-Regular";
       src: url('Oswald-Regular.ttf');
@@ -188,4 +204,3 @@ html, body {
     width: 140px;
     line-height: 30px;
 }
-
