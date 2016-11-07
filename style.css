@@ -51,6 +51,7 @@ html, body {
   font-size: 17px;
   font-family: Oswald-Regular;
   line-height: 30px;
+  text-decoration: none;
 }
 .catalog_date{
     color: rgb(173,195,192);
