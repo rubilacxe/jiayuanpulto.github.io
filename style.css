@@ -7,7 +7,7 @@ html, body {
 .container {
     max-width: 960px;
     min-width: 760px;
-    width: 65%;
+    width: 80%;
     margin: 0 auto;
     padding: 1em;
 }
