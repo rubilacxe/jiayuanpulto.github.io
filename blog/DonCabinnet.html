@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="唐·卡宾奈之歌-The Song of Don Cabinnet"/>
+<title>唐·卡宾奈之歌-The Song of Don Cabinnet</title>
+<link type="text/css" href="../style.css" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main_left">
+            <div id="page_left"></div>
+        </div>
+        <div class="main_right">
+            <div class="entry">
+                <!-- content -->
+                <div class="top">
+                    <a href="/"><img class="avatar" src="../image/mypic_ingress.png"></a>
+                    <div class="title">唐·卡宾奈之歌-The Song of Don Cabinnet</div>
+                </div>
+                <div class="intro"><p>Don Cabinnet</p><p>a bard from the north</p><p>Oct 29, 2016</p></div>
+                <object data="/audio/DonCabinnet.mp3"></object>
+                        <div class="section">Lyrics</div>
+                        <p>(2017年5月13日北京可汗大会3R团角色背景)</p>
+
+                        <p> “唐·卡宾奈”幼年时被一名树精带到北方的一座人类小镇，
+                          并作为街头流浪儿在这里生活了数十年。
+                          他在100岁左右遇到了旅行来到此地的人类吟游诗人“唐·克里塞”，成为了他的学徒，
+                          取了艺名“唐·卡宾奈”，并跟随他离开了小镇。二十年后，“唐·克里塞”离世，
+                          “唐·卡宾奈”开始独自旅行与歌唱。</br>
+
+                          “唐·卡宾奈”天性乐观，随遇而安。他不记得自己的本名和身世，
+                          只记得是一个“绿色的人”把自己送到了那座镇子上，甚至连镇子的名字也没有印象。
+                          儿时记忆的缺失让“唐·卡宾奈”连自己到底是精灵还是半精灵都不敢确定。
+                          他并不十分热衷于主动探求自己的身世，而更在意自己作为吟游诗人的身份与名声。
+                          不过如果有线索出现，好奇心也会让他一路追查下去。</br>
+
+                          如果有人问到他的身世和过去，“唐·卡宾奈”通常会用一首歌曲如实相告，
+                          但不会主动说起把自己带到小镇上的那个“绿色的人”，而只是表示记事以来变生活在那里。
+                          至于“唐·克里塞”离世的细节，“唐·卡宾奈”通常会避开这个话题，如果一直被逼问，
+                          也只会说那是一段不愿回忆起的私事，不希望提起。</br>
+                </p>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                url: "../left_main.html",
+                type: "GET",
+                success: function(data){
+                    $("#page_left").html(data);
+                },
+            });
+        });
+    </script>
+    </body>
+</html>
