@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="小镇五日-Five Days in the Town"/>
+<title>小镇五日-Five Days in the Town</title>
+<link type="text/css" href="../style.css" rel="stylesheet" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main_left">
+            <div id="page_left"></div>
+        </div>
+        <div class="main_right">
+            <div class="entry">
+                <!-- content -->
+                <div class="top">
+                    <a href="/"><img class="avatar" src="../image/mypic_ingress.png"></a>
+                    <div class="title">小镇五日-Five Days in the Town</div>
+                </div>
+                <div class="intro"><p>Rubilacxe</p><p>a bard</p><p>May 15, 2017</p></div>
+                <object data="/audio/FDitT.mp3"></object>
+                        <div class="section">背景</div>
+                        <p>(2017年5月13日北京可汗大会3R团跑团记录)</p>
+                        <p>(改编自 Marty Robbins的歌曲 Big Iron)</p>
+
+                        <p>”唐·卡宾奈”与他的四名队友在一座小镇挫败了某个神秘人物毁灭小镇的计划，写下此歌以作记录。
+                        </br>
+
+
+                </p>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                url: "../left_main.html",
+                type: "GET",
+                success: function(data){
+                    $("#page_left").html(data);
+                },
+            });
+        });
+    </script>
+    </body>
+</html>
